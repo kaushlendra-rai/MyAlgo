@@ -29,12 +29,12 @@ public class MergeSortImpl {
 		}
 	}
 
-	private static void merge(int[] nums, int[] work, int i, int j, int mid) {
-		int counter1 = i;
+	private static void merge(int[] nums, int[] work, int start, int end, int mid) {
+		int counter1 = start;
 		int counter2 = mid + 1;
-		int workCounter = i;
-		while(workCounter <= j){
-			if(counter1 <= mid && counter2 <= j){
+		int workCounter = start;
+		while(workCounter <= end){
+			if(counter1 <= mid && counter2 <= end){
 				if(nums[counter1] < nums[counter2])
 					work[workCounter++] = nums[counter1++];
 				else
@@ -46,7 +46,8 @@ public class MergeSortImpl {
 			}
 		}
 		
-		for(int k=i; k <= j; k++)
+		// Update array with sorted numbers from work array.
+		for(int k=start; k <= end; k++)
 			nums[k] = work[k];
 	}
 }

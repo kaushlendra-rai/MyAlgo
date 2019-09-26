@@ -5,8 +5,7 @@ public class RemoveTreeNodesLyingOutOfRange {
 		TreeNode node = DSUtil.getBinaryTree();
 		DSUtil.printTree(node);
 		TreeNode result = removeNodesOutOfRange(node, 22, 50);
-		System.out.println("*******  " + result.value);
-		System.out.println("Result : ");
+		System.out.println("\nResult : ");
 		DSUtil.printTree(result);
 	}
 
@@ -19,7 +18,7 @@ public class RemoveTreeNodesLyingOutOfRange {
 			node.right = removeNodesOutOfRange(node.right, min, max);
 		}else if(node.value < min){
 			node = removeNodesOutOfRange(node.right, min, max);
-		}else if(node.value > max){
+		}else{
 			node = removeNodesOutOfRange(node.left, min, max);
 		}
 		

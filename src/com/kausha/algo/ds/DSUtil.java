@@ -262,8 +262,9 @@ public class DSUtil {
 	}
 	
 	public static void printDLL(DoublyLinkedListNode dll){
+		System.out.println("\n");
 		while(dll != null){
-			System.out.println(dll.data);
+			System.out.print(dll.data + " ");
 			dll = dll.next;
 		}
 	}

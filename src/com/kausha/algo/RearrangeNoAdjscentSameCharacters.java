@@ -22,7 +22,7 @@ public class RearrangeNoAdjscentSameCharacters {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String str = "aabbcc";
+		String str = "aaaabbcc";
 		System.out.println("Input string : " + str);
 		String rearrangedStr = rearrangeString(str);
 		System.out.println("Re-arranged str : "  + rearrangedStr);

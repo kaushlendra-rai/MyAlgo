@@ -56,9 +56,7 @@ public class SplitWordsUsingDictionary {
 					wordList.add(term.getCompleteWord());
 					return true;
 				}
-			}
-			
-			if(getWords(root, term, word, index+1, wordList)){
+			}else if(getWords(root, term, word, index+1, wordList)){
 				return true;
 			}
 		}

@@ -20,8 +20,10 @@ public class LargestCommonSubString {
 				if(str1.charAt(i) == str2.charAt(j)){
 					match[i+1][j+1] = match[i][j] + 1;
 					
-					if(largestLength < match[i+1][j+1])
+					if(largestLength < match[i+1][j+1]) {
 						largestString = str2.substring(j-match[i][j], j+1);
+						largestLength = largestString.length();
+					}
 				}
 			}
 		}

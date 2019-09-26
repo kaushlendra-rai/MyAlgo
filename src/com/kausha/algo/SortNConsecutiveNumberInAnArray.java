@@ -6,7 +6,6 @@ public class SortNConsecutiveNumberInAnArray {
 		int arr[] = {1, 0, 3, 2, 4};
 
 		rearrangeArray(arr);
-
 	}
 
 	// This method also handles scenarios where a number is 

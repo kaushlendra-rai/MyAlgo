@@ -85,7 +85,7 @@ public class RuleBasedSwitch0And1In2D {
 	}
 
 	private static int[][] getInitializedInputGrid() {
-		int[][] grid = {{1, 0, 0, 0, 0, 0, 1, 1, 0},
+		int[][] grid = {{1, 0, 0, 0, 0, 0, 0, 1, 0},
 						{0, 0, 0, 0, 0, 0, 0, 0, 0},
 						{1, 1, 0, 1, 0, 0, 0, 1, 0},
 						{0, 0, 0, 0, 0, 0, 0, 0, 0},

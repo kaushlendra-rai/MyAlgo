@@ -11,8 +11,8 @@ public class MedianOfTwoSortedArrays {
 		int[] array1 = {1, 5, 15, 22, 27, 35};
 		int[] array2 = {1, 2, 3, 4, 6, 7, 9};
 		*/
-		getMeanApproach2(array1, array2, 0, array1.length-1, 0,  array2.length-1, 0);
-		//System.out.println("Median of merged array = " + getMedian(array1, array2));
+		//getMeanApproach2(array1, array2, 0, array1.length-1, 0,  array2.length-1, 0);
+		System.out.println("Median of merged array = " + getMedian(array1, array2));
 	}
 
 	/**

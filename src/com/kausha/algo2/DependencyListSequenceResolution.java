@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 // http://www.careercup.com/question?id=5134681810927616
+// https://leetcode.com/problems/course-schedule-ii/solution/
 /**
  * Given a list of dependency list of libraries (X depends on Y)
  * Generate a list in order in which libraries MUST be loaded.

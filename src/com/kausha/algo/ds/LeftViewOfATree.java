@@ -18,9 +18,7 @@ public class LeftViewOfATree {
 			return;
 		
 		Queue<GraphNode> queue = new LinkedList<GraphNode>();
-		
 		Queue<GraphNode> queue2 = new LinkedList<GraphNode>();
-		
 		queue.add(node);
 		queue.add(null);
 		

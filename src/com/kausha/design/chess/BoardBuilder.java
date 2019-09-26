@@ -6,8 +6,9 @@ public class BoardBuilder {
 	ChessBoard chessBoard = new ChessBoard();
 	boolean boardInitialized;
 	
+	// Initialize alternate Blocks as Black & White.
 	public BoardBuilder initializeBlocksOnBoard(){
-		
+		// Sets color of alternate Blocks of Board as BLACK & WHITE
 		boardInitialized = true;
 		return this;
 	}
@@ -27,6 +28,9 @@ public class BoardBuilder {
 	}
 	
 	public ChessBoard build(){
-		return chessBoard;
+		if(boardInitialized)
+			return chessBoard;
+		else
+			return null;
 	}
 }

@@ -11,12 +11,14 @@ public class LinkedListBasedPalindromeValidationIterative {
 	private static boolean validatePalindromeInLinkedListIterative(LinkedListNode node) {
 		// Reverse the DLL half way and then compare 0 with (N/2 + 1) & so on
 		LinkedListNode lengthNode = node;
+		// Find length of the LinkedList
 		int length = 0;
 		while(lengthNode != null){
 			length++;
 			lengthNode = lengthNode.next;
 		}
 		
+		// Iteratively reverse the LinkedList
 		LinkedListNode firstNode = node;
 		int counter = 0;
 		while(node.next != null && counter < (length/2)-1){
@@ -29,11 +31,13 @@ public class LinkedListBasedPalindromeValidationIterative {
 			counter++;
 		}
 		
+		//Ensure that you skip the central node from reversal if the list is odd sized. 
 		if(length%2 == 0)
 			node = node.next;
 		else
 			node = node.next.next;
 		
+		// Compare the node values.
 		while(node != null){
 			if(node.data == firstNode.data){
 				node = node.next;

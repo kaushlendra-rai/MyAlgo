@@ -4,8 +4,10 @@ public interface Piece {
 	Color getColour();
 	
 	PieceType getPieceType();
+	boolean isActive();
+	void deactive();
 	
-	MoveStrategy getStrategy();
+	boolean isMoveable(ChessBoard board, Block start, Block end);
 	
-	void setStrategy(MoveStrategy moveStrategy);
+	void move(ChessBoard board, Block start, Block end);
 }

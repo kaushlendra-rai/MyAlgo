@@ -4,6 +4,8 @@ package com.kausha.algo.ds;
 public class InOrderSuccessorOfBST {
 	public static void main(String[] args) {
 		TreeNode node = DSUtil.getBinaryTree();
+		
+		// This below node actually exists in the tree which we intend to work on in above 'node' Tree
 		TreeNode node2 = node.right.left.left;
 		
 		TreeNode result = inOrderSuccessor(node, node2);

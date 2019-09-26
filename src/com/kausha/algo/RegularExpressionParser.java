@@ -4,11 +4,12 @@ public class RegularExpressionParser {
 	public static void main(String[] args) {
 		String str = "sample";
 		String expr = "*sam*l**";
-		int strIndex = 0;
-		int exprIndex = 0;
 		boolean status = parseExpression(str, expr);
 		System.out.println("Status = " + status);
+		
+		System.out.println("2 ****" + isMatch(str, expr));
 	}
+
 	
 	private static boolean parseExpression(String str, String expr) {
 		int strIndex = 0;
@@ -54,4 +55,19 @@ public class RegularExpressionParser {
 			return false;
 		}
 	}
+	
+	//  Not working as expected for my expression.
+	// ##############################################
+	public static boolean isMatch(String text, String pattern) {
+        if (pattern.isEmpty()) return text.isEmpty();
+        boolean first_match = (!text.isEmpty() &&
+                               (pattern.charAt(0) == text.charAt(0) || pattern.charAt(0) == '.'));
+
+        if (pattern.length() >= 2 && pattern.charAt(1) == '*'){
+            return (isMatch(text, pattern.substring(2)) ||
+                    (first_match && isMatch(text.substring(1), pattern)));
+        } else {
+            return first_match && isMatch(text.substring(1), pattern.substring(1));
+        }
+    }
 }

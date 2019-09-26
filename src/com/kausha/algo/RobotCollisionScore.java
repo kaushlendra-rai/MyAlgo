@@ -5,40 +5,30 @@ public class RobotCollisionScore {
 	/**
 	 * https://www.hackerrank.com/contests/101hack48/challenges/walking-robots
 	 * 
-	 * •The robots are initially spaced apart on an infinitely long straight line. Some of them begin moving simultaneously at the same constant speed. Two robots moving in the same direction never collide.
-•Two robots moving toward each other will crash, break down, and stay at that point forever. This counts as  collisions.
-•A robot moving toward a non-moving robot will crash into it, break down, and stay at that point forever. This counts as  collision.
+	 * •The robots are initially spaced apart on an infinitely long straight line. 
+	 * Some of them begin moving simultaneously at the same constant speed. Two robots moving in the same direction never collide.
+		•Two robots moving toward each other will crash, break down, and stay at that point forever. This counts as  collisions.
+		•A robot moving toward a non-moving robot will crash into it, break down, and stay at that point forever. This counts as  collision.
 
-To clarify, whenever a moving robot crashes onto another robot, it will stay at that point and become a non-moving robot at that location. 
+		To clarify, whenever a moving robot crashes onto another robot, it will stay at that point and become a non-moving robot at that location. 
+		Return an integer denoting the total number of collisions that eventually occur after movement begins.
 
+		Sample Input 0
 
-Return an integer denoting the total number of collisions that eventually occur after movement begins.
-
-
-
-Sample Input 0
-
-
-
-5
-r
-lrrl
-rrrll
-rrdlldrr
-rrrdllrllrrl
-
-
-
-
-Sample Output 0
-
-
-
-0
-3
-5
-4
-11
+		5
+		r
+		lrrl
+		rrrll
+		rrdlldrr
+		rrrdllrllrrl
+		
+		Sample Output 0
+		
+		0
+		3
+		5
+		4
+		11
 
 	 * @param args
 	 */
@@ -48,7 +38,8 @@ Sample Output 0
 		//char[] input = {'r', 'r', 'r', 'l', 'l', 'r', 'l', 'l', 'r', 'r', 'l'};
 		
 		// rrdlldrr
-		char[] input = {'r', 'r', 'd', 'l', 'l', 'd', 'r', 'r'};
+		//char[] input = {'r', 'r', 'd', 'l', 'l', 'd', 'r', 'r'};
+		char[] input = {'r', 'r', 'd', 'r', 'r', 'r', 'l'};
 		System.out.println(getTotalColissions(input));
 	}
 
@@ -67,7 +58,7 @@ Sample Output 0
 				// If there exists a robot moving to right, it collides with this left and makes them dead robot
 				// So, also update the dead robot index
 				if(rIndex >= 0){
-					collisionCount += 2 + i-1 -rIndex;
+					collisionCount += i -rIndex;
 					rIndex = -1;
 					deadIndex = i;
 				}else if(deadIndex >= 0){

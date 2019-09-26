@@ -26,6 +26,8 @@ public class LinkedListBasedPalindromeValidationRecursive {
 			return null;
 		
 		if(tempNode.data.equals(node1.data)){
+			// In case of complete match, we will reach null eventually on both list.
+			// However, in order to distinguish between failure and success, we keep success as non-null.
 			if(tempNode.next == null)
 				return tempNode;
 			else

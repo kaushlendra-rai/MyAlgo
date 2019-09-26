@@ -34,6 +34,8 @@ public class MunimumDistanceBetweenTwoCharacters {
 					if(minDistance > localDist)
 						minDistance = localDist;
 				}
+				
+				valueChanged = false;
 			}
 		}
 		

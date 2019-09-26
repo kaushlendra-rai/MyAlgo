@@ -2,8 +2,6 @@ package com.kausha.algo.ds;
 
 import java.util.Stack;
 
-
-
 // http://www.careercup.com/question?id=5767618180939776
 public class BST_ZigZag_SumOfNumberAtEachLevel {	
 	public static void main(String[] args) {

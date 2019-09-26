@@ -9,9 +9,13 @@ public class NextLargerNumberWithNoConsecutiveOne {
 	}
 
 	private static int getNextLargerNum(int num) {
-		
+
+		// Ideally we need to check
+		// 1) If there are two consecutive '1', resolve by below logic.
+		// 2) If not, add '1' to above number and repeat the steps. Final number is the answer.
 		int nextLarger = nextLarger(num);
 		
+		// Step 2
 		if(num == nextLarger)
 			nextLarger = nextLarger(num+1);
 		
@@ -28,7 +32,7 @@ public class NextLargerNumberWithNoConsecutiveOne {
 				bits[i] = 1;
 			counter = counter << 1;
 		}
-		
+		// Carry forward
 		counter = 0;
 		
 		for(int i=0; i < 32; i++){
@@ -37,7 +41,7 @@ public class NextLargerNumberWithNoConsecutiveOne {
 			}else if(i  < 31 && ((bits[i] & bits[i+1]) == 1 || (counter & bits[i+1]) == 1)){
 				counter = 1;
 				bits[i] = bits[i+1] = 0;
-				i++;
+				i=i+2;
 			}else if(counter == 1){
 				bits[i] = 1;
 				counter = 0;

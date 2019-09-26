@@ -5,7 +5,7 @@ public class RemoveAdjacentDuplicates {
 		
 		StringBuilder str = new StringBuilder("abccddbadd");
 		System.out.println("Original String = " + str);
-		System.out.println(removeAdjacentduplicates(str));
+		System.out.println("Final : "+ removeAdjacentduplicates(str));
 	}
 
 	public static StringBuilder removeAdjacentduplicates(StringBuilder str){

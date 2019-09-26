@@ -11,6 +11,18 @@ public class FindRepeatingNumbersIn1ToNArray {
 		findRepeatingNumbers(num);
 	}
 
+	/**
+	 * This approach might not be good for larger numbers.
+	 * Alternate:
+	 * if(num[i]>0)
+	 * 	num[num[i]] = num[i]*-1
+	 * else if (num[num[i]] < 0)
+	 * 	num[num[i]] = 0
+	 * 
+	 * index with value = '0' are repeating numbers.
+	 * 
+	 * @param num
+	 */
 	private static void findRepeatingNumbers(int[] num) {
 		for(int i=0; i < num.length; i++){
 			int index = num[i] % num.length;

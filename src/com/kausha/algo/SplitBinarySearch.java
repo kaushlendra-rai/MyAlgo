@@ -9,11 +9,11 @@ public class SplitBinarySearch {
 	 */
 	public static void main(String[] args) {
 		
-		int[] sortedNum = {8,9,10,11, 12, 13, 14, 15, 16, 17, 1,2,3,4,5,6};
+		int[] sortedNum = {8,9,10,11, 12, 13, 14, 15, 16, 17, 1,2,3,5,6};
 		
 		//int[] sortedNum = {8,9,14,1,2,3,4,5,6};
 
-		System.out.println(searchNumber(sortedNum, 24));
+		System.out.println(searchNumber(sortedNum, 14));
 	}
 
 	private static boolean searchNumber(int[] arr, int i) {

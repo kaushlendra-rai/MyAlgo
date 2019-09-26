@@ -28,24 +28,44 @@ public class SortedDLLToBST {
 			lengthOfDLL++;
 		}
 
-		Object[] refNode = new Object[1];
-		refNode[0] = start;
-		
-		return convertDLLToBST(refNode, lengthOfDLL);
+		return convertDLLToBST(start, lengthOfDLL);
+		/*
+		 * Object[] refNode = new Object[1]; refNode[0] = start;
+		 * 
+		 * return convertDLLToBST(refNode, lengthOfDLL);
+		 */
 	}
 	
-	private static DoublyLinkedListNode convertDLLToBST(Object[] nodeRef, int lengthOfDLL) {
+	private static DoublyLinkedListNode convertDLLToBST(DoublyLinkedListNode node, int lengthOfDLL) {
+		
+		if(lengthOfDLL <= 0)
+			return null;
+		//System.out.println("lengthOfDLL = " + lengthOfDLL);
+		//System.out.println("lengthOfDLL = " + lengthOfDLL + " NODE = " + node.data);
+		DoublyLinkedListNode left = convertDLLToBST(node, lengthOfDLL/2);
+		DoublyLinkedListNode root = node;
+		DoublyLinkedListNode right = null;
+		if(node.next != null)
+			right = convertDLLToBST(node.next, lengthOfDLL - lengthOfDLL/2 -1);
+		
+		root.prev = left;
+		root.next = right;
+		
+		return root;
+	}
+	
+	private static DoublyLinkedListNode convertDLLToBST2(Object[] nodeRef, int lengthOfDLL) {
 		System.out.println("lengthOfDLL = " + lengthOfDLL);
 		if(lengthOfDLL <= 0)
 			return null;
 		
-		DoublyLinkedListNode left = convertDLLToBST(nodeRef, lengthOfDLL/2);
+		DoublyLinkedListNode left = convertDLLToBST2(nodeRef, lengthOfDLL/2);
 		
 		DoublyLinkedListNode node = (DoublyLinkedListNode)nodeRef[0];
 		DoublyLinkedListNode root = node;
 		
 		nodeRef[0] = node.next;
-		DoublyLinkedListNode right = convertDLLToBST(nodeRef, lengthOfDLL - lengthOfDLL/2 -1);
+		DoublyLinkedListNode right = convertDLLToBST2(nodeRef, lengthOfDLL - lengthOfDLL/2 -1);
 		
 		root.prev = left;
 		root.next = right;

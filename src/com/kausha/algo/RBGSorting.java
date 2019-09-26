@@ -19,6 +19,7 @@ public class RBGSorting {
 		
 		while(counter <= end){
 			while(data[start] == 0){
+				System.out.println("+++");
 				start++;
 				counter++;
 			}
@@ -33,11 +34,10 @@ public class RBGSorting {
 			}else if(data[counter] == 1){
 				counter++;
 			}else{
+				System.out.println("*");
 				data[counter++] = data[start];
 				data[start++] = 0;
 			}
-		}
-		
+		}	
 	}
-
 }

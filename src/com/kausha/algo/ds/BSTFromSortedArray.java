@@ -15,13 +15,11 @@ public class BSTFromSortedArray {
 		return createBSTFromSortedArray(arr, 0, arr.length-1);
 	}
 
-	private static TreeNode createBSTFromSortedArray(int[] arr, int start, int end) {
-		
+	private static TreeNode createBSTFromSortedArray(int[] arr, int start, int end) {	
 		if(start>end)
 			return null;
 		
 		int mid = start + (end-start)/2;
-		
 		TreeNode left = createBSTFromSortedArray(arr, start, mid-1);
 		TreeNode right = createBSTFromSortedArray(arr, mid + 1, end);
 		
@@ -31,6 +29,4 @@ public class BSTFromSortedArray {
 		
 		return node;
 	}
-	
-	
 }

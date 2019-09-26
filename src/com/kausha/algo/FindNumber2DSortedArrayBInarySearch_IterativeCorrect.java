@@ -9,7 +9,7 @@ public class FindNumber2DSortedArrayBInarySearch_IterativeCorrect {
 					{16, 17, 18, 19, 20},
 					{21, 22, 23, 34, 45}};
 		
-		boolean status = findNumber(nums, 5);
+		boolean status = findNumber(nums, 4);
 		System.out.println("Status = " + status);
 	}
 
@@ -19,15 +19,15 @@ public class FindNumber2DSortedArrayBInarySearch_IterativeCorrect {
 		int top = 0;
 		int bottom = nums.length-1;
 		
-		while(left < right && top <= bottom){
+		while(left <= right && top <= bottom){
 			int midRow = top + (bottom-top)/2;
 			int midColumn = left + (right-left)/2;
 			
 			if(nums[midRow][midColumn] == i)
 				return true;
 			else if(nums[midRow][midColumn] > i){
-				top = 0;
-				left = 0;
+				//top = 0;
+				//left = 0;
 				bottom = midRow;
 				right = midColumn;
 			}else{

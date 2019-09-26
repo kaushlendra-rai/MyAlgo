@@ -2,7 +2,8 @@ package com.kausha.algo;
 
 public class FindSubArrayWithMaximumSum {
 	public static void main(String[] args) {
-		int[] nums = {-2, -4, -1, -3, -6, -9};
+		//int[] nums = {-2, -4, -1, -3, -6, -9};
+		int[] nums = {2, 4, -1, -6, 6, -1, 2, -9};
 		getMaxSubArray(nums);
 	}
 
