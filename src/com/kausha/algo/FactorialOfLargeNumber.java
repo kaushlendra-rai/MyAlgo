@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public class FactorialOfLargeNumber {
 	public static void main(String[] args) {
 		try{
-		factorial(50);
-		System.out.println(factorial2(50));
+		factorial(10000);
+		//System.out.println(factorial2(15000));
 		}catch(Throwable t){
 			t.printStackTrace();
 		}
@@ -18,7 +18,7 @@ public class FactorialOfLargeNumber {
 		// If negative, add +1 to it to balance the -1. However it would add an unnecessary extra computation just to find end of actual number of factorial.
 		int factorialDigits  = 1;
 		
-		int[] result = new int[1000];
+		int[] result = new int[60000];
 		
 		result[0] = 1;
 		
