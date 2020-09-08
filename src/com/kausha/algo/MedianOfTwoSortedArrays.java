@@ -13,8 +13,51 @@ public class MedianOfTwoSortedArrays {
 		*/
 		//getMeanApproach2(array1, array2, 0, array1.length-1, 0,  array2.length-1, 0);
 		System.out.println("Median of merged array = " + getMedian(array1, array2));
+		
+		System.out.println("***** getMedianEfficient Median of merged array = " + getMedianEfficient(array1, array2));
 	}
 
+	// https://www.youtube.com/watch?v=LPFhl65R7ww
+	// Complexity O(log(min(m , n))
+	private static double getMedianEfficient(int[] array1, int[] array2){
+		double median = 0;
+		
+		if(array1.length > array2.length)
+			return getMedianEfficient(array2, array1);
+		
+		int x= array1.length;
+		int y = array2.length;
+		
+		int start = 0;
+		int end = x;
+		
+		while(start <= end) {
+			int midX = start + (end-start)/2;
+			int midY = (x + y + 1)/2 - midX;
+			System.out.println("midX: " + midX + " , midY: " + midY);
+			int maxLeftX = midX == 0 ? Integer.MIN_VALUE : array1[midX-1];
+			int minRightX = midX == x ? Integer.MAX_VALUE : array1[midX];
+			
+			int maxLeftY = midY == 0 ? Integer.MIN_VALUE : array2[midY-1];
+			int minRightY = midY == y ? Integer.MAX_VALUE : array2[midY];
+			
+			if(maxLeftX <= minRightY && maxLeftY <= minRightX) {
+				if((x + y)%2 == 0)
+					median =  (double)(Math.max(maxLeftX, maxLeftY) + Math.max(minRightX, minRightY))/2;
+				else
+					median = (double)Math.max(maxLeftX, maxLeftY);
+
+				break;
+			}else if (maxLeftX > minRightY){
+				end = midX -1;
+			}else {
+				start = midX+1;
+			}
+		}
+		
+		return median;
+	}
+	
 	/**
 	 * Complexity O(n+m)
 	 * @param array1
