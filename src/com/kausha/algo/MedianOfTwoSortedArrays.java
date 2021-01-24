@@ -104,37 +104,4 @@ public class MedianOfTwoSortedArrays {
 		
 		return mean;
 	}
-	
-	private static void getMeanApproach2(int[] array1, int[] array2, int start1, int end1, int start2, int end2, int meanCounter){
-		
-		System.out.println("start1 = " + start1 + "   , end1 = " + end1);
-		System.out.println("start2 = " + start2 + "   , end2 = " + end2);
-		int mean1 = array1[start1 + (end1 - start1)/2];
-		int mean2 = array2[start2 + (end2 - start2)/2];
-		
-		System.out.println("meanCounter = " + meanCounter);
-		System.out.println("mean1 = " + mean1);
-		System.out.println("mean2 = " + mean2);
-		if(meanCounter >= (array1.length + array2.length)/2){
-			if(mean1 < mean2)
-				System.out.println("Mean = " + mean1);
-			else
-				System.out.println("Mean = " + mean2);
-			return;
-		}
-		
-		if(mean1 <= mean2){
-			meanCounter += (end1 - start1)/2 +1;
-			start1 += (end1 - start1)/2 +1;
-			end2 = start2 + (end2 - start2)/2;
-			
-			getMeanApproach2(array1, array2, start1, end1, start2, end2, meanCounter);
-		}else{
-			meanCounter += (end2 - start2)/2 + 1;
-			start2 += (end2 - start2)/2 + 1;
-			end1 = start1 + (end1 - start1)/2;
-			
-			getMeanApproach2(array1, array2, start1, end1, start2, end2, meanCounter);
-		}
-	}
 }

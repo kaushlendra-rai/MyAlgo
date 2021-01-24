@@ -22,7 +22,7 @@ public class FirstNPrimeNumbers {
 		while(counter < size){
 			boolean isPrime = true;
 			for(int i=0; i < counter; i++){
-				if(num%primes[i] ==0){
+				if(primes[i] > 0 && num%primes[i] ==0){
 					isPrime = false;
 					break;
 				}

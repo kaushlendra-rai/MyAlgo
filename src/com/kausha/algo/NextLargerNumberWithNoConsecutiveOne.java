@@ -24,7 +24,7 @@ public class NextLargerNumberWithNoConsecutiveOne {
 
 	private static int nextLarger(int num) {
 		int nextLarger = 0;
-		
+		// Convert the number to integer array
 		int[] bits = new int[32];
 		int counter = 1;
 		for(int i=0; i< 32; i++){
@@ -34,7 +34,8 @@ public class NextLargerNumberWithNoConsecutiveOne {
 		}
 		// Carry forward
 		counter = 0;
-		
+		// Find next number without consecutive '1'.  If there are no consecutive '1',
+		// the below code returns the same number.
 		for(int i=0; i < 32; i++){
 			if(counter == 1 && bits[i] == 1){
 				bits[i] = 0;
@@ -47,7 +48,7 @@ public class NextLargerNumberWithNoConsecutiveOne {
 				counter = 0;
 			}
 		}
-		
+		// Get the resulting number from the representing array.
 		counter =1;
 		for(int i=0; i< 32; i++){
 			if(bits[i] == 1)
