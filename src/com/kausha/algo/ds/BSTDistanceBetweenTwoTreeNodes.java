@@ -1,6 +1,6 @@
 package com.kausha.algo.ds;
 
-public class BSTDistanceBetweenTwoBinaryTree {
+public class BSTDistanceBetweenTwoTreeNodes {
 	public static void main(String[] args) {
 		TreeNode node = DSUtil.getBinaryTree();
 		TreeNode node1 = new TreeNode(26);// 52 & 24 have common ancestor via 26. Distance = 4

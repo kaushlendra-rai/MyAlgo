@@ -2,7 +2,7 @@ package com.kausha.algo.ds;
 
 import java.util.Stack;
 
-public class BSTInorderTraversalIterative {
+public class BSTPreorderTraversalIterative {
 	public static void main(String[] args) {
 		TreeNode root = DSUtil.getBinaryTree();
 		DSUtil.printTreeRecursively(root);
@@ -11,25 +11,19 @@ public class BSTInorderTraversalIterative {
 	}
 
 	private static void inorderTraversal(TreeNode root) {
-		if (root == null)
+		if(root == null)
 			return;
 		
 		Stack<TreeNode> stack = new Stack<TreeNode>();
-		
-		while(root != null) {
-			stack.push(root);
-			root = root.left;
-		}
+		stack.push(root);
 		
 		while(!stack.isEmpty()) {
 			TreeNode node = stack.pop();
 			System.out.println(node.value);
-			TreeNode right = node.right;
-			
-			while(right != null) {
-				stack.push(right);
-				right = right.left;
-			}
+			if(node.right != null)
+				stack.push(node.right);
+			if(node.left != null)
+				stack.push(node.left);
 		}
 	}
 }

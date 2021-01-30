@@ -1,6 +1,6 @@
 package com.kausha.algo.ds;
 
-public class KthLargestElementInBST {
+public class KthLargestElementInBST_Recursive {
 	public static void main(String[] args) throws Exception{
 		int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 		TreeNode root = BSTFromSortedArray.createBSTFromSortedArray(arr);
