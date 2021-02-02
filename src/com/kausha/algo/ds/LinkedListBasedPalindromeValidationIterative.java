@@ -1,5 +1,6 @@
 package com.kausha.algo.ds;
 
+// This approach works only if we are allowed to change the internal sequence of the linked list.
 public class LinkedListBasedPalindromeValidationIterative {
 	public static void main(String[] args) {
 		LinkedListNode node = DSUtil.generateLinkedList();

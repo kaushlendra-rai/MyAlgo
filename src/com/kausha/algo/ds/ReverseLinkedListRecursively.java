@@ -1,6 +1,7 @@
 package com.kausha.algo.ds;
 
 public class ReverseLinkedListRecursively {
+
 	public static void main(String[] args) {
 		LinkedListNode node = DSUtil.generateLinkedList();
 		System.out.println("Input List:");
@@ -11,27 +12,31 @@ public class ReverseLinkedListRecursively {
 		DSUtil.printLinkedList(reversedLinkedList);
 	}
 
+	// Using circular linked list to maintain the final reversed root to be returned.
 	private static LinkedListNode reversedLinkedList(LinkedListNode node) {
-		FirstNodeHolder holder = new FirstNodeHolder();
-		LinkedListNode reversedList = reverse(node, holder);
-		reversedList.next = null;
+		if(node == null)
+			return null;
 		
-		return holder.node;
+		LinkedListNode reversedLL = reversedCircularLinkedList(node);
+		LinkedListNode root = reversedLL.next;
+		// Break the Circular LinkedList
+		reversedLL.next = null;
+		
+		return root;
 	}
 	
-	private static LinkedListNode reverse(LinkedListNode node, FirstNodeHolder holder) {
-		if(node == null || node.next == null){
-			holder.node = node;
+	private static LinkedListNode reversedCircularLinkedList(LinkedListNode node) {
+		if(node.next == null) {
+			node.next = node;
 			return node;
 		}
 		
-		LinkedListNode temp = reverse(node.next, holder);
-		temp.next = node;
+		LinkedListNode returnedNode = reversedCircularLinkedList(node.next);
+		LinkedListNode temp = returnedNode.next;
+		returnedNode.next = node;
+		
+		node.next = temp;
 		
 		return node;
 	}
-}
-
-class FirstNodeHolder{
-	LinkedListNode node;
 }
