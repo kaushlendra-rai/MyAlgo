@@ -36,35 +36,26 @@ public class SerializeDeserializeBinaryTree {
 	}
 	
 	private static TreeNode deserializeBinaryTree(String ser) {
-		String[] vals = ser.split(" ");
-		int arrayCounter = 0;
-		// If teh node sent for serialization was null, value at '0' index would be '#'
-		if("#".equals(vals[0]))
+		String[] nums = ser.split(" ");
+		if("#".equals(nums[0]))
 			return null;
 		
-		TreeNode root = new TreeNode(Integer.parseInt(vals[arrayCounter++]));
+		int nodeIndexCounter = 0;
 		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		TreeNode root = new TreeNode(Integer.parseInt(nums[0]));
 		queue.offer(root);
-		
 		while(!queue.isEmpty()) {
 			TreeNode node = queue.poll();
-			
-			if(node != null) {
-				TreeNode left = null;
-				if(!"#".equals(vals[arrayCounter])) {
-					left = new TreeNode(Integer.parseInt(vals[arrayCounter]));
-				}
-				node.left = left;
-				queue.offer(left);
-				arrayCounter++;
-				
-				TreeNode right = null;
-				if(!"#".equals(vals[arrayCounter])) {
-					right = new TreeNode(Integer.parseInt(vals[arrayCounter]));
-				}
-				node.right = right;
-				queue.offer(right);
-				arrayCounter++;
+			String left = nums[++nodeIndexCounter];
+			String right = nums[++nodeIndexCounter];
+
+			if(!"#".equals(left)) {
+				node.left = new TreeNode(Integer.parseInt(left));
+				queue.offer(node.left);
+			}
+			if(!"#".equals(right)) {
+				node.right = new TreeNode(Integer.parseInt(right));
+				queue.offer(node.right);
 			}
 		}
 		
