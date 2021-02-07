@@ -3,14 +3,14 @@ package com.kausha.algo.ds;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class LRUCacheNew2<K, V> {
+public class LRUCacheOld<K, V> {
 
 	private ConcurrentMap<K, DataNode> cache = new ConcurrentHashMap<K, DataNode>();
 	
 	//Circular Linked List
 	private DataNode<K, V> topNode;
 	
-	public LRUCacheNew2(int maxCache){
+	public LRUCacheOld(int maxCache){
 		maxCacheSize = maxCache;
 	}
 	int maxCacheSize = 100;

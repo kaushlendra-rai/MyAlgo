@@ -1,6 +1,6 @@
 package com.kausha.algo;
 
-public class MunimumDistanceBetweenTwoCharacters {
+public class MinimumDistanceBetweenTwoCharacters {
 	public static void main(String[] args) {
 		String str = "axcaerrade";
 		int distance = findMinimumDistance(str, 'a', 'e');
