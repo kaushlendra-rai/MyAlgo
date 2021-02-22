@@ -4,9 +4,14 @@ public class LinkedListNode {
 
 	public String data;
 	public LinkedListNode next;
+	public int num;
 	
 	public LinkedListNode(String data){
 		this.data = data;
+	}
+	
+	public LinkedListNode(int num){
+		this.num = num;
 	}
 	
 	public String getData() {
