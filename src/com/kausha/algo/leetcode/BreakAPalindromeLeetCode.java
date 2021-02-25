@@ -41,15 +41,12 @@ public class BreakAPalindromeLeetCode {
 			return "";
 		boolean oddCentrePassed = false;
 		for(int i=1; i < str.length(); i++) {
-			System.out.println("i:" + i);
 			// switching any character at the center in odd length palindrome has no effect. It stays a plaindrome still.
 			if(str.length()%2 == 1 && (str.length()/2) == i) {
 				oddCentrePassed = true;
-				System.out.println("Continue");
 				continue;
 			}else {
 				if (!oddCentrePassed && str.charAt(i-1) != 'a') {
-					System.out.println("12");
 					brokenPalindrome = str.substring(0, i-1) + "a" + str.substring(i);
 					break;
 				}else if(str.charAt(i-1) == 'a'  && str.charAt(i) != 'a'){
@@ -65,7 +62,6 @@ public class BreakAPalindromeLeetCode {
 		// Replace the last character with 'b'. as we could not replace any character based on above conditions.
 		if(brokenPalindrome == null) {
 			brokenPalindrome = str.substring(0, str.length()-1) + "b";
-			System.out.println("Inside");
 		}
 		return brokenPalindrome;
 	}

@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @author sinkar
  *
  */
-public class CoinChange {
+public class CoinChangeTotalWays {
 	public static void main(String[] args) {
 		int coins[] = {1, 2, 5, 10, 20};
 		System.out.println(makeChange(coins, 7));
