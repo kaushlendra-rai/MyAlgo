@@ -4,6 +4,7 @@ public class LinkedListNode {
 
 	public String data;
 	public LinkedListNode next;
+	public LinkedListNode rnd;
 	public int num;
 	
 	public LinkedListNode(String data){
