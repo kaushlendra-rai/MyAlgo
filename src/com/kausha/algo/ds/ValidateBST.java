@@ -10,10 +10,10 @@ public class ValidateBST {
 		if(node == null)
 			throw new Exception("Node is null");
 		
-		return valiadteBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		return valiadteBST(node, Long.MIN_VALUE, Long.MAX_VALUE);
 	}
 	
-	private static boolean valiadteBST(TreeNode node, int min, int max){
+	private static boolean valiadteBST(TreeNode node, long min, long max){
 		if(node == null)
 			return true;
 		

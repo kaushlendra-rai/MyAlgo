@@ -3,7 +3,9 @@ package com.kausha.algo;
 public class FindMissingNumberInArrayUsingXOR {
 	
 	public static void main(String[] args) {
-		int arr[] = {0, 3, 4, 1, 5};
+		//int arr[] = {0, 3, 4, 1, 5};
+		//int arr[] = {3, 0, 1};
+		int[] arr = new int[] {0, 1, 2, 3, 5};
 
 		findMissingNumber(arr);	
 

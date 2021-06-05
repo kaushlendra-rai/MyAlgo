@@ -1,57 +1,52 @@
 package com.kausha.algo;
 
-// Get the First & last index of a number in  a sorted array. If number not found, return -1 respectively.
+//https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 public class FirstAndLastIndexOfKInSortedArray {
 
 	public static void main(String[] args) {
-		//Sorted Array with duplicates
-		int[] arr = new int[] {1, 2, 2, 3, 5, 6, 6, 6, 6, 9};
-		int[] idx = getFirstAndLastIndexOfNum(arr, 9);
-		System.out.printf("First index %d and Last index: %d match at:", idx[0], idx[1]);
+		int[] nums = new int[] {5, 7, 7, 8, 8, 10};
+		
+		FirstAndLastIndexOfKInSortedArray firstLast = new FirstAndLastIndexOfKInSortedArray();
+		int[] idx = firstLast.searchRange(nums, 8);
+		System.out.println("Range: " + idx[0] + " , " + idx[1]);
+	}
+	
+	public int[] searchRange(int[] nums, int target) {
+		int[] result = new int[] {-1, -1};
+		if(nums.length == 0)
+			return result;
+
+		result[0]=searchRange(nums, target, true, 0);
+		if(result[0] != -1)
+			result[1]=searchRange(nums, target, false, result[0]);
+		
+		return result;
 	}
 
-	// We search the start & end indexes using Binary search.
-	private static int[] getFirstAndLastIndexOfNum(int[] arr, int num) {
-		int[] idx = new int[2];
-		if(arr == null || arr.length == 0) {
-			idx[0] = -1;
-			idx[1] = -1;
-			return idx; 
-		}
-		
-		idx[0] = findNumIndex(arr, num, true);
-		idx[1] = findNumIndex(arr, num, false);
-		
-		return idx;
-	}
-
-	private static int findNumIndex(int[] arr, int num, boolean left) {
-		int start = 0;
-		int end = arr.length-1;
-		int idx = -1;
+	private int searchRange(int[] nums, int target, boolean left, int start) {
+		int end = nums.length-1;
 		
 		while(start <= end) {
 			int mid = start + (end-start)/2;
-			if(arr[mid] == num) {
+			if(target == nums[mid]) {
+				System.out.println("mid = " + mid);
 				if(left) {
-					if(mid==0 || (mid>0 && arr[mid-1] != num)) {
-						idx = mid;
-						break;
-					}else
+					if((mid > 0 && nums[mid-1] != target) || mid == 0)
+						return mid;
+					else
 						end = mid-1;
 				}else {
-					if(mid==arr.length-1 || (mid<arr.length-1 && arr[mid+1] != num)) {
-						idx = mid;
-						break;
-					}else
+					if((mid < nums.length-1 && nums[mid+1] != target) || mid == nums.length -1)
+						return mid;
+					else
 						start = mid+1;
 				}
-			}else if(arr[mid] < num){
-				start = mid+1;
-			}else
+			}else if(target < nums[mid]){
 				end = mid-1;
+			}else
+				start = mid+1;
 		}
 		
-		return idx;
+		return -1;
 	}
 }

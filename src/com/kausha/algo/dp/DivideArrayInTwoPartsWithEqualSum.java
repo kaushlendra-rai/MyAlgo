@@ -1,85 +1,105 @@
 package com.kausha.algo.dp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-// http://www.dsalgo.com/2013/02/back-to-content-array-equal-sum.html
 public class DivideArrayInTwoPartsWithEqualSum {
 	public static void main(String[] args) {
-		int[] arr = {1, 2, 3, 4, 5, 6, 7};
+		//int[] arr = {1, 2, 3, 4, 5, 6, 21};
+		int[] arr = {2, 5, 6, 7, 10};
+		//int[] arr = {1, 5, 6};
 		
 		List<Integer> firstHalf = divideArrayInEqualParts(arr);
-		System.out.println("firstHalf = " + firstHalf);
+		System.out.println(" DP firstHalf = " + firstHalf);
+		
+		List<Integer> firstHalfBasic = divideArrayInEqualParts_Basic_Exponential(arr);
+		System.out.println(" Basic firstHalf = " + firstHalfBasic);
 	}
-
-	private static List<Integer> divideArrayInEqualParts(int[] arr) {
-		// If the sum of array elements is odd, array cannot be split. Return null
+	
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] nums) {
 		int sum = 0;
-		for(int num : arr)
-			sum+=num;
+		for(int num : nums)
+			sum += num;
+		int half = sum/2;
 		
-		if(sum%2 == 1)
+		List<Integer> result = divideArrayInEqualParts_Basic_Exponential(nums, 0, half, new ArrayList<Integer>(), 0);
+		return result;
+	}
+	
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] nums, int idx, int sum, List<Integer> currNums, int currSum) {
+		if(idx >= nums.length)
 			return null;
+		List<Integer> newList = new ArrayList<>(currNums);
+		if(currSum + nums[idx] == sum) {
+			newList.add(nums[idx]);
+			return newList;
+		}
+		// Don't include the current number in the sum.
+		List<Integer> excluded = divideArrayInEqualParts_Basic_Exponential(nums, idx +1, sum, newList, currSum);
+		if (excluded != null){
+			return excluded;
+		}
 		
-		// We now only need to figure out the nums having sum equal to half of total sum
-		sum = sum/2;
+		// Current number included.
+		newList = new ArrayList<>(currNums);
+		newList.add(nums[idx]);
+		currSum += nums[idx];
+		List<Integer> included = divideArrayInEqualParts_Basic_Exponential(nums, idx  +1, sum, newList, currSum);
+		if (included != null){
+			return included;
+		}
 		
-		Arrays.sort(arr);
+		return null;
+	}
+	
+	// This is a DP problem
+	private static List<Integer> divideArrayInEqualParts(int[] nums) {
+		// First find the sum of all numbers
+		int sum = 0;
+		for(int num : nums)
+			sum += num;
+		int half = sum/2;
+		// We will fill the elements with numbers that can be formed using the current number.
+		// We check at every number if we have reached the required sum/2 at every 'x'.
+		// x axis: number from 0 - sum
+		// y axis: available number in array.
+		int[][] grid = new int[nums.length+1][sum];
+		//grid[0][0] = 1;
 		
-		int[][] memo = new int[arr.length+1][sum+1];
-		int lastnum = 0;
-		
+		//The index of number from nums at which the sum matched the required value.
+		// This would be helpful in tracking the numbers that added to the required sum.
+		int lastIndex = 0;
 		outer:
-		for(int i=1; i <= arr.length; i++){
-			lastnum = i;
-			for(int j=1; j <= sum; j++){
-				if(arr[i-1] > j)
-					memo[i][j] = memo[i-1][j];
+		for(int i=1; i<=nums.length; i++) {
+			lastIndex = i;
+			for(int j=1; j<sum; j++) {
+				if(j < nums[i-1])
+					grid[i][j] = grid[i-1][j];
 				else
-					memo[i][j] = arr[i-1] + memo[i-1][j - arr[i-1]];
+					grid[i][j] = nums[i-1] + grid[i-1][j-nums[i-1]];
 				
-				if(memo[i][j] == sum)
+				if(grid[i][j] == half)
 					break outer;
 			}
 		}
 		
-		// Print array
-		printArray(memo);
-		
-		System.out.println("memo[arr.length][sum] = " + memo[arr.length][sum]);
-		
-		// If last element of memo if equal to sum, only then array can be split in half
-		if(memo[lastnum][sum] != sum){
+		if(grid[lastIndex][half] == half)
+			System.out.println("Match is Found!!!!!!!!!!!!!!!!");
+		else
 			return null;
-		}
 		
-		// Find the numbers to be split the array
-		List<Integer> half = new ArrayList<Integer>();
-		
-		int i=lastnum;
-		int j = sum;
-		
-		while(sum>0){
-			if(memo[i][j] == sum && memo[i-1][j] == sum){
-				i--;
-			}else if(memo[i][j] == sum){
-				half.add(i);
-				sum = sum-i;
-			}else
-				j--;
-		}
-		
-		
-		return half;
-	}
-	
-	private static void printArray(int[][] arr){
-		for(int i = 0; i < arr.length; i++){
-			for(int j=0; j < arr[0].length; j++){
-				System.out.print(arr[i][j] + "   ");
+		// Find the list of number which form the sum
+		// Now we need to track down the numbers that formed the half. We have the last index of nums & the sum to track it.
+		List<Integer> halfList = new ArrayList<>();
+		while(half > 0) {
+			if(grid[lastIndex][half] != grid[lastIndex-1][half]) {
+				halfList.add(nums[lastIndex-1]);
+				half -= nums[lastIndex-1];
 			}
-			System.out.println("");
+			
+			lastIndex--;
 		}
+
+		return halfList;
 	}
 }

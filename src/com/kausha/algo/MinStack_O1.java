@@ -91,6 +91,6 @@ class MinStack{
 	}
 	
 	public Integer min() {
-		return stack.peek();
+		return minStack.peek();
 	}
 }

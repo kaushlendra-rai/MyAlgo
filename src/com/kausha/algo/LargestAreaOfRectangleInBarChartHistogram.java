@@ -3,6 +3,7 @@ package com.kausha.algo;
 import java.util.Stack;
 
 // https://www.youtube.com/watch?v=E5C5W6waHlo
+// https://www.youtube.com/watch?v=zx5Sw9130L0
 public class LargestAreaOfRectangleInBarChartHistogram {
 	
 	public static void main(String[] args) {
