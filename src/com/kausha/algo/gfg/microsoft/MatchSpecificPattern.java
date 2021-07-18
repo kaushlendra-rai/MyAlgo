@@ -33,6 +33,6 @@ public class MatchSpecificPattern {
 	}
 	
 	private int[] getCharFrequency(String str) {
-		
+		return null;
 	}
 }
