@@ -4,7 +4,8 @@ package com.kausha.algo;
 public class KthLargest_Partitioning {
 	public static void main(String[] args) {
 		//int[] nums = {4, 2, 5, 1, 88, 3, 9};
-		int[] nums = new int[] {3,2,3,1,2,4,5,5,6};
+		int[] nums = {4, 2, 5, 1, 88, 3, 9, 18, 22};
+		//int[] nums = new int[] {3,2,3,1,2,4,5,5,6};
 		System.out.println(kthLargest(nums, 4));
 	}
 

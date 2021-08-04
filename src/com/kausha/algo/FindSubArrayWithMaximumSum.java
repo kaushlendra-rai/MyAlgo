@@ -10,26 +10,21 @@ public class FindSubArrayWithMaximumSum {
 	private static void getMaxSubArray(int[] nums){
 		// Global sum
 		int largestSum = nums[0];
-		
 		// Local current sum
 		int localSum = nums[0];
-		
 		// Indexes for Max Global sequence
 		int startIndex = 0;
 		int endIndex = 0;
 		
-		int startTemp = 0;
-		
 		for(int i=1; i<nums.length; i++){
 			if(localSum < 0){
 				localSum = nums[i];
-				startTemp = i;
+				startIndex = i;
 			}else
 				localSum += nums[i];
 			
 			if(largestSum  < localSum){
 				largestSum = localSum;
-				startIndex = startTemp;
 				endIndex = i;
 			}
 		}

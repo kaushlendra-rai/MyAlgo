@@ -4,7 +4,7 @@ public class FindMissingNumberReplacedByRepeatingNumber {
 
 	public static void main(String[] args) {
 		//int arr[] = {0, 3, 4, 1, 0, 5};
-		int arr[] = {3, 0, 4, 1, 0, 5};
+		int arr[] = {3, 1, 4, 1, 6, 5};
 		findMissingNumber(arr);
 	}
 
@@ -14,7 +14,7 @@ public class FindMissingNumberReplacedByRepeatingNumber {
 			if(num < 0)
 				num*=-1;
 			
-			arr[num] *=-1;
+			arr[num-1] *=-1;
 		}
 		
 		int[] numArr = new int[4];
