@@ -10,16 +10,23 @@ public class WordBreakWithDictionary {
 
 	public static void main(String[] args) {
 		Set<String> dictionary = new HashSet<String>();
-		dictionary.add("Kaushal");
-		dictionary.add("is");
-		dictionary.add("a");
-		dictionary.add("rock");
-		dictionary.add("star");
-		dictionary.add("hero");
-		dictionary.add("champ");
-
-		System.out.println(wordBreak("Kaushalisarockstar", dictionary)); // Kaushal is a rock star
-		System.out.println(wordBreak("Kaushal123", dictionary)); // null
+//		dictionary.add("Kaushal");
+//		dictionary.add("is");
+//		dictionary.add("a");
+//		dictionary.add("rock");
+//		dictionary.add("star");
+//		dictionary.add("hero");
+//		dictionary.add("champ");
+//
+//		System.out.println(wordBreak("Kaushalisarockstar", dictionary)); // Kaushal is a rock star
+//		System.out.println(wordBreak("Kaushal123", dictionary)); // null
+//		
+		dictionary.add("cats");
+		dictionary.add("dog");
+		dictionary.add("sand");
+		dictionary.add("and");
+		dictionary.add("cat");
+		System.out.println(wordBreak("catsandog", dictionary)); // Kaushal is a rock star
 	}
 
 	private static Map<String, String> mem = new HashMap<>();

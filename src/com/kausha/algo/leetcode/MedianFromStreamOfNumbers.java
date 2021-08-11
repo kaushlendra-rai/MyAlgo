@@ -37,7 +37,7 @@ class MedianFinder {
     public void addNum(int num) {
         maxHeap.offer(num);
         minHeap.offer(maxHeap.poll());
-        
+        // We are performing shuffling to restore the sorting of numbers in the two heaps.
         if(maxHeap.size() < minHeap.size())
         	maxHeap.offer(minHeap.poll());
     }
