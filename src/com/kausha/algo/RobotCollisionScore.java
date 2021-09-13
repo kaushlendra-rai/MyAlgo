@@ -33,13 +33,15 @@ public class RobotCollisionScore {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-//		char[] input = {'l', 'r'};
+		//char[] input = {'l', 'r'};
+		char[] input = {'l', 'r', 'd'};
 		// rrrdllrllrrl
 		//char[] input = {'r', 'r', 'r', 'l', 'l', 'r', 'l', 'l', 'r', 'r', 'l'};
 		
 		// rrdlldrr
 		//char[] input = {'r', 'r', 'd', 'l', 'l', 'd', 'r', 'r'};
-		char[] input = {'r', 'r', 'd', 'r', 'r', 'r', 'l'};
+		//char[] input = {'r', 'r', 'd', 'r', 'r', 'r', 'l'};
+		//char[] input = {'l', 'l', 'r', 'r', 'd', 'd', 'd', 'r', 'r', 'r', 'l', 'r'};
 		System.out.println(getTotalColissions(input));
 	}
 

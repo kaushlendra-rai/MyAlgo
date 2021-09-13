@@ -5,8 +5,11 @@ import java.util.HashMap;
 /**
  * We have unlimited supply of coins of given denominations
  * 1. If the current denomination is 1 then return 1. This is the base case.
-2. If current denomination is 20, set next denomination as 10; if current denomination is 10, set next denomination as 5 and if current denomination is 5, set next denomination as 1.
-3. Now implement the recurrence relation: numberOfWays(amount, denom) =  numberOfWays(amount - 0*denom, nextDenom) + numberOfWays(amount - 1*denom, nextDenom) + ... + numberOfWays(0, nextDenom) using a while loop.
+2. If current denomination is 20, set next denomination as 10; if current denomination is 10, 
+	set next denomination as 5 and if current denomination is 5, set next denomination as 1.
+3. Now implement the recurrence relation: 
+	numberOfWays(amount, denom) =  numberOfWays(amount - 0*denom, nextDenom) + 
+		numberOfWays(amount - 1*denom, nextDenom) + ... + numberOfWays(0, nextDenom) using a while loop.
  * @author sinkar
  *
  */

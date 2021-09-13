@@ -3,6 +3,7 @@ package com.kausha.algo;
 public class RingCircularBuffer<E> {
 
 	int size;
+	// The count of numbers actually present in the array buffer.
 	int count;
 	int read; // From where read happens
 	int write; // Last index where a readable content will exist
@@ -23,19 +24,17 @@ public class RingCircularBuffer<E> {
 	public RingCircularBuffer(int size) {
 		this.size = size;
 		buffer = (E[])new Object[size];
-		read = 0;
-		write = 0;
 	}
 	
 	public boolean offer(E element) {
 		if(count == size) {
-			System.out.println("Full");
+			//System.out.println("Full");
 			return false;
 		}
 		
 		buffer[write] = element;
 		write = (write + 1)%size;
-		System.out.println("Write write: " + write);
+		//System.out.println("Write write: " + write);
 		
 		count++;
 		return true;
@@ -45,11 +44,12 @@ public class RingCircularBuffer<E> {
 		// Check if buffer is empty.
 		if(count == 0)
 			return null;
-		System.out.println("Read IDX: " + read);
+		//System.out.println("Read IDX: " + read);
 		count--;
 		E val = buffer[read];
 		read = (read+1) % size;
 		
 		return val;
 	}
+	
 }

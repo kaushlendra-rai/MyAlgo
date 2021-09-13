@@ -4,7 +4,7 @@ import java.util.Stack;
 
 /**
  * Google Question:
-Given a gird of NxN cells, with Integer cell values, we can define a path effort of a path from source (0,0) to the
+Given a grid of NxN cells, with Integer cell values, we can define a path effort of a path from source (0,0) to the
  destination (N-1, N-1) as the max of the absolute differences of the adjacent cell values. While traversing, you can 
  move up, down, left and right — 4 moves from the current cell in the grid.
  For a given Threshold value, find if it is possible to have a path in such a matrix with the effort not greater than

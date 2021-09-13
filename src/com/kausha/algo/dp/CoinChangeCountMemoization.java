@@ -8,7 +8,7 @@ using the sum of the given three numbers.
  * @author sinkar
  *
  */
-public class CoinChangeCountNew {
+public class CoinChangeCountMemoization {
 	static int[] count;
 	public static void main(String[] args) {
 		count = new int[10];
@@ -16,7 +16,6 @@ public class CoinChangeCountNew {
 	}
 
 	private static int countTotalWays(int num) {
-		System.out.println("****");
 		if(num <0)
 			return 0;
 		if(num == 0)

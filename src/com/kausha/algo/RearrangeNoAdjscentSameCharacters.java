@@ -6,7 +6,8 @@ import java.util.PriorityQueue;
 public class RearrangeNoAdjscentSameCharacters {
 
 	/**
-	 * Given a string with repeated characters, task is rearrange characters in a string so that no two adjacent characters are same.
+	 * Given a string with repeated characters, task is rearrange characters in a string so that
+	 *  no two adjacent characters are same.
 	 * 
 	 * Input: aaabc 
 		Output: abaca 

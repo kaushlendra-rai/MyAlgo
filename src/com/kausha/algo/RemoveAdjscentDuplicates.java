@@ -4,16 +4,18 @@ package com.kausha.algo;
 public class RemoveAdjscentDuplicates {
 
 	public static void main(String[] args) {
-		//System.out.println(removeAdjDups("acaaabbbacdddd"));
-		//System.out.println(removeAdjDups("acaaabbbac"));
+		System.out.println(removeAdjDups("acaaabbbacdddd"));
+		System.out.println(removeAdjDups("acaaabbbac"));
 		System.out.println(removeAdjDups("aac"));
-
+		System.out.println(removeAdjDups("a"));
 	}
 
 	public static String removeAdjDups(String str) {
+		if(str.length() == 1)
+			return str;
+		
 		StringBuilder sb = new StringBuilder();
 		int counter = 0;
-		
 		while(counter< str.length()-1) {
 			if(str.charAt(counter) != str.charAt(counter+1)) {
 				sb.append(str.charAt(counter));

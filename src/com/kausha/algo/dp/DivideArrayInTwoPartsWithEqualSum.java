@@ -1,12 +1,13 @@
 package com.kausha.algo.dp;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DivideArrayInTwoPartsWithEqualSum {
 	public static void main(String[] args) {
-		//int[] arr = {1, 2, 3, 4, 5, 6, 21};
-		int[] arr = {2, 5, 6, 7, 10};
+		int[] arr = {1, 2, 3, 4, 5, 6, 21};
+		//int[] arr = {2, 5, 6, 7, 10};
 		//int[] arr = {1, 5, 6};
 		
 		List<Integer> firstHalf = divideArrayInEqualParts(arr);
@@ -16,40 +17,36 @@ public class DivideArrayInTwoPartsWithEqualSum {
 		System.out.println(" Basic firstHalf = " + firstHalfBasic);
 	}
 	
-	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] nums) {
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] arr) {
 		int sum = 0;
-		for(int num : nums)
+		for(int num : arr)
 			sum += num;
-		int half = sum/2;
 		
-		List<Integer> result = divideArrayInEqualParts_Basic_Exponential(nums, 0, half, new ArrayList<Integer>(), 0);
-		return result;
+		if(sum%2 != 0)
+			return Collections.EMPTY_LIST;
+		
+		sum = sum/2;
+		
+		List<Integer> half = divideArrayInEqualParts_Basic(arr, sum, 0);
+		
+		return half;
 	}
-	
-	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] nums, int idx, int sum, List<Integer> currNums, int currSum) {
-		if(idx >= nums.length)
+
+	private static List<Integer> divideArrayInEqualParts_Basic(int[] arr, int sum, int idx) {
+		if(sum == 0)
+			return new ArrayList<Integer>();
+		if(idx == arr.length)
 			return null;
-		List<Integer> newList = new ArrayList<>(currNums);
-		if(currSum + nums[idx] == sum) {
-			newList.add(nums[idx]);
-			return newList;
-		}
-		// Don't include the current number in the sum.
-		List<Integer> excluded = divideArrayInEqualParts_Basic_Exponential(nums, idx +1, sum, newList, currSum);
-		if (excluded != null){
-			return excluded;
+		List<Integer> half = divideArrayInEqualParts_Basic(arr, sum-arr[idx], idx+1);
+		
+		if(half != null) {
+			// If a half match is found, add the current number contributing to the half of the array sum.
+			half.add(arr[idx]);
+		}else {
+			half = divideArrayInEqualParts_Basic(arr, sum, idx+1);
 		}
 		
-		// Current number included.
-		newList = new ArrayList<>(currNums);
-		newList.add(nums[idx]);
-		currSum += nums[idx];
-		List<Integer> included = divideArrayInEqualParts_Basic_Exponential(nums, idx  +1, sum, newList, currSum);
-		if (included != null){
-			return included;
-		}
-		
-		return null;
+		return half;
 	}
 	
 	// This is a DP problem
