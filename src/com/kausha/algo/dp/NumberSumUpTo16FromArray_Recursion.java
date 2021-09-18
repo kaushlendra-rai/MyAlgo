@@ -2,7 +2,7 @@ package com.kausha.algo.dp;
 
 // Dynamic Programming - Find Sets Of Numbers That Add Up To 16
 // We need to find the count of sets of numbers that sum up to say '16'.
-public class NumberSumUpTo16FromArray_Recursice {
+public class NumberSumUpTo16FromArray_Recursion {
 
 	public static void main(String[] args) {
 		int[] nums = new int[] {2, 4, 6, 10}; // Expected answer: 2 for :: {2, 4, 10} & {6, 10}

@@ -1,6 +1,7 @@
 package com.kausha.algo.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -52,4 +53,46 @@ public class LetterCombinationsOfPhoneNumber {
 		
         return combinations;
     }
+	
+	// The below method is recursive approach visualizing the content creation as tree
+	public static void main2(String[] args) {
+		Map<Character, List<Character>> keys= new HashMap<>();
+
+		keys.put('0', Arrays.asList(new Character[] {' '}));
+		keys.put('1', Arrays.asList(new Character[] {' '}));
+		keys.put('2', Arrays.asList(new Character[] {'a', 'b', 'c'}));
+		keys.put('3', Arrays.asList(new Character[] {'d', 'e', 'f'}));
+		keys.put('4', Arrays.asList(new Character[] {'g', 'h', 'i'}));
+		keys.put('5', Arrays.asList(new Character[] {'j', 'k', 'l'}));
+		keys.put('6', Arrays.asList(new Character[] {'m', 'n', 'o'}));
+		keys.put('7', Arrays.asList(new Character[] {'p', 'q', 'r', 's'}));
+		keys.put('8', Arrays.asList(new Character[] {'t', 'u', 'v'}));
+		keys.put('9', Arrays.asList(new Character[] {'w', 'x', 'y', 'z'}));
+
+		List<String> combo = getCombinations("23", keys);
+		System.out.println(combo);
+	}
+	
+	private static List<String> getCombinations(String nums, Map<Character, List<Character>> keys) {
+		List<String> combo = new ArrayList<>();
+		
+		getCombinations(nums, keys, combo, 0, new StringBuilder());
+		
+		return combo;
+	}
+	
+	private static void getCombinations(String nums, Map<Character, List<Character>> keys, List<String> combo, 
+			int idx, StringBuilder sb) {
+		if(nums.length() == idx) {
+			combo.add(sb.toString());
+			return;
+		}
+		
+		List<Character> vals = keys.get(nums.charAt(idx));
+		for(Character val : vals) {
+			sb.append(val);
+			getCombinations(nums, keys, combo, idx+1, sb);
+			sb.deleteCharAt(idx);
+		}
+	}
 }

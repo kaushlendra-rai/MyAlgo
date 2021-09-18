@@ -30,10 +30,39 @@ public class RemoveKNumsToFormSmallestNum {
 
 	}
 
+	public String removeKdigits(String num, int k) {
+		Stack<Character> stack = new Stack<>();
+		
+		for(int i=0; i<num.length(); i++) {
+			while(!stack.isEmpty() && stack.peek() > num.charAt(i) && k > 0) {
+				stack.pop();
+				k--;
+			}
+			
+			if((stack.isEmpty() && num.charAt(i) != '0') || !stack.isEmpty())
+				stack.push(num.charAt(i));
+		}
+		
+		// If we have not removed all 'k' elements, it implies that the remaining numbers 
+		// in stack were all increasing. Hence we must pop those many remaining numbers.
+		// Rebuild the remaining string
+		while(!stack.isEmpty() && k-- > 0)
+			stack.pop();
+		
+		String str = "";
+		if(stack.isEmpty())
+			str = "0";
+		
+		while(!stack.isEmpty())
+			str = stack.pop() + str;
+		
+		return str;
+	}
+	
 	// The overall idea is to:
 	// Remove any peak number from right to left.
 	// If we end up having '0' at the start, remove it automatically.
-	public String removeKdigits(String num, int k) {
+	public String removeKdigits2(String num, int k) {
 		Stack<Integer> digits = new Stack<>();
 		digits.push(num.charAt(0) - '0');
 		int idx = 1;
