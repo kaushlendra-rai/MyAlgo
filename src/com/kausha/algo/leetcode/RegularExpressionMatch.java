@@ -1,5 +1,8 @@
 package com.kausha.algo.leetcode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 // https://leetcode.com/problems/regular-expression-matching/
 public class RegularExpressionMatch {
 
@@ -66,5 +69,46 @@ public class RegularExpressionMatch {
 		
 		return match[str.length()][pattern.length()];
     }
+	
+	// Recursive solution
+	public boolean isMatch_recursive(String str, String pattern) {
+		if(pattern.isEmpty())
+			return str.isEmpty();
+		
+		boolean firstMatch = !str.isEmpty() && (str.charAt(0) == pattern.charAt(0) || '.' == pattern.charAt(0));
+		if(pattern.length() > 1 && '*' == pattern.charAt(1)){
+			return (firstMatch && isMatch(str.substring(1), pattern)) || // Pattern matched teh current string.
+					isMatch(str, pattern.substring(2)); // Substring from '2' because we need to skip char along with the '*'.
+		}else if (firstMatch)
+			return isMatch(str.substring(1), pattern.substring(1));
+		
+		return false;
+	}
+	
+	// Memozation with recursion
+	public boolean isMatch_Memo(String str, String pattern) {
+		Map<String, Boolean> memo = new HashMap<>();
+		return isMatch_Memo(str, pattern, memo);
+	}
+	public boolean isMatch_Memo(String str, String pattern, Map<String, Boolean> memo) {
+		String key = str + "-" + pattern;
+		if(memo.containsKey(key))
+			return memo.get(key);
+		
+		if(pattern.isEmpty())
+			return str.isEmpty();
+		
+		boolean firstMatch = !str.isEmpty() && (str.charAt(0) == pattern.charAt(0) || '.' == pattern.charAt(0));
+		boolean status = false;
+		if(pattern.length() > 1 && '*' == pattern.charAt(1)){
+			status = (firstMatch && isMatch(str.substring(1), pattern)) || // Pattern matched teh current string.
+					isMatch(str, pattern.substring(2)); // Substring from '2' because we need to skip char along with the '*'.
+		}else if (firstMatch)
+			status = isMatch(str.substring(1), pattern.substring(1));
+		
+		memo.put(key, status);
+		
+		return status;
+	}
 }
  
