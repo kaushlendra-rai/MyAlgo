@@ -48,9 +48,8 @@ class LRUCache {
     	if(node != null) {
     		// Put the recent accessed node at the top.
     		removeNodeFromDLL(node);
-    		//System.out.println("GET top: " + top.val + " , top.next.val: " + top.next.val);
     		putNodeOnTop(node);
-    		//System.out.println("GET22 top: " + top.val + " , top.next.val: " + top.next.val);
+
     		return node.val;
     	}
     	
@@ -58,7 +57,6 @@ class LRUCache {
     }
     
     public void put(int key, int value) {
-    	//System.out.println("PUT cache.size: " + cache.size() + ", key: " + key + " , value: " + value);
     	CacheNode node = cache.get(key);
     	if(node != null) { // Update
     		node.val = value;
@@ -67,7 +65,6 @@ class LRUCache {
     	}else {// Add for first time
     		// The cache is full, evict the Least recently used node.
     		if(cache.size() >= capacity) {
-    			//System.out.println("Cache overflow. top: " + top.val + " , delete: " + top.prev.val + " cache.size: " + cache.size());
     			// Remove the LRU node;
     			cache.remove(top.prev.key);
     			removeNodeFromDLL(top.prev);
@@ -94,7 +91,6 @@ class LRUCache {
 	}
 
 	private CacheNode putNodeOnTop(CacheNode node) {
-		//System.out.println("@@@@@ cache.size: " + cache.size() + ", node.val: " + node.val + ", top.val: " + top.val + ", top.prev.val: " + top.prev.val);
 		CacheNode last = top.prev;
     	node.next = top;
     	node.prev = last;
@@ -104,7 +100,7 @@ class LRUCache {
     	
     	// Now top points to the newly added node.
     	top = node;
-    	//System.out.println("******  top.val: " + top.val + " , top.next.val=" + top.next.val);
+
     	return node;
     }
 }

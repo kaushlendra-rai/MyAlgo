@@ -24,6 +24,7 @@ public class MedianFromStreamOfNumbers {
 		mf.addNum(2);
 		mf.addNum(3);
 		mf.addNum(4);
+		mf.addNum(4);
 		
 		System.out.println(mf.findMedian());
 	}
@@ -38,6 +39,7 @@ class MedianFinder {
         maxHeap.offer(num);
         minHeap.offer(maxHeap.poll());
         // We are performing shuffling to restore the sorting of numbers in the two heaps.
+        // If below step is not done, heaps get in problem for e.g.: 1, 2, 3, 4, 4
         if(maxHeap.size() < minHeap.size())
         	maxHeap.offer(minHeap.poll());
     }

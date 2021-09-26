@@ -28,6 +28,37 @@ public class MaxAreaOfAnIsland {
 	}
 
 	public int maxAreaOfIsland(int[][] grid) {
+		int maxArea = 0;
+		for(int i=0; i < grid.length; i++)
+			for(int j=0; j < grid[0].length; j++) {
+				int area = visitNode(grid, i, j, 0);
+				maxArea = area > maxArea ? area : maxArea;
+			}
+		return maxArea;
+	}
+
+	private int visitNode(int[][] grid, int i, int j, int area) {
+		// Boundary checks
+		if(i < 0 || i >= grid.length || j < 0 || j >= grid[0].length)
+			return area;
+		if(grid[i][j] != 1)
+			return area;
+		
+		// Mark node as visited and increment area by 1
+		grid[i][j] = 2;
+		area++;
+		
+		area = visitNode(grid, i+1, j, area);
+		area = visitNode(grid, i-1, j, area);
+		area = visitNode(grid, i, j+1, area);
+		area = visitNode(grid, i, j-1, area);
+		
+		return area;
+	}
+	
+	// In an alternate approach, we can possibly use the grid itself for maintaining the visited/island
+	// nodes.
+	public int maxAreaOfIsland_old(int[][] grid) {
 		int[][] island = new int[grid.length][grid[0].length];
 		int counter = 0;
 		// Visit grid and isolate islands with counter numbers.

@@ -4,6 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 // https://leetcode.com/problems/max-points-on-a-line/
+/**
+ * Given an array of points where points[i] = [xi, yi] represents a point on the X-Y plane,
+ *  return the maximum number of points that lie on the same straight line.
+ *  
+ *  Input: points = [[1,1],[2,2],[3,3]]
+Output: 3
+
+Input: points = [[1,1],[3,2],[5,3],[4,1],[2,3],[1,4]]
+Output: 4
+ * @author sinkar
+ *
+ */
 public class MaxPointsOnALine {
 
 	public static void main(String[] args) {
@@ -26,6 +38,8 @@ public class MaxPointsOnALine {
 	}
 	
 	// We iterate in nested loop, find the slope for a given set of points.
+	// x = my + c
+	// slope = (x1-x2)/(y1-y2)
 	// For a given starting point, if the slope between starting and other point already exists, it implies that the 
 	// point is on the line with the same slope. 
 	// If they do, then those points are on the line for the given pair.
@@ -59,6 +73,8 @@ public class MaxPointsOnALine {
         	for(Integer val : slopes.values())
         		if(val + duplicate > maxCount)
         			maxCount = val + duplicate;
+        	
+        	// We are maintaining the vertical slopes separate and it is not added to map, hence checking it separately. 
         	if(vertical + duplicate > maxCount)
     			maxCount = vertical + duplicate;
         	

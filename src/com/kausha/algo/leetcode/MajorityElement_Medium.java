@@ -4,6 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 // https://leetcode.com/problems/majority-element-ii/
+/**
+ * Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+Follow-up: Could you solve the problem in linear time and in O(1) space?
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: [3]
+Example 2:
+
+Input: nums = [1]
+Output: [1]
+Example 3:
+
+Input: nums = [1,2]
+Output: [1,2]
+ * @author sinkar
+ *
+ */
 public class MajorityElement_Medium {
 
 	public static void main(String[] args) {
@@ -11,9 +33,9 @@ public class MajorityElement_Medium {
 		//int[] nums = new int[] {3,2,3};
 		//int[] nums = new int[] {2,2,1,1,1,2,2};
 		//int[] nums = new int[] {2};
-		int[] nums = new int[] {1, 2, 3, 2, 2, 3, 1, 1, 2, 1};
+		//int[] nums = new int[] {1, 2, 3, 2, 2, 3, 1, 1, 2, 1};
+		int[] nums = new int[] {1, 1, 2, 2, 3, 3, 4, 4, 1, 2, 5, 6 , 7, 8};
 		System.out.println(me.majorityElement(nums));
-
 	}
 
 	public List<Integer> majorityElement(int[] nums) {

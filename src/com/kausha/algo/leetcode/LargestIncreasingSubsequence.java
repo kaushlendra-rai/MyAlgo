@@ -9,8 +9,8 @@ public class LargestIncreasingSubsequence {
 		//int[] nums = new int[] {10,9,2,5,3,7,101,18};
 		//int[] nums = new int[] {3, 4, -1, 0, 6, 2, 3};
 		//int[] nums = new int[] {10};
-		//int[] nums = new int[] {0,1,0,3,2,3};
-		int[] nums = new int[] {7, 7, 7, 7, 7, 7};
+		int[] nums = new int[] {0,1,0,3,2,3};
+		//int[] nums = new int[] {7, 7, 7, 7, 7, 7};
 		
 		System.out.println(lis.lengthOfLIS(nums));
 	}
