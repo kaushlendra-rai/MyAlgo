@@ -20,6 +20,9 @@ public class MinimumSumPath2DGrid {
 		System.out.println(up.minPathSum(obstacleGrid));
 	}
 
+	// An alternate approach could be is to set the '0' row & column as Integer.MAX
+	// and then use only one operation:
+	// sum[i][j] = Math.min(sum[i-1][j], sum[i][j-1]) + grid[i-1][j-1];s
 	public int minPathSum(int[][] grid) {
 		 int[][] sum = new int[grid.length+1][grid[0].length +1];
 		    

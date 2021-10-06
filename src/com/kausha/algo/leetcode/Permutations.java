@@ -15,6 +15,7 @@ Example 2:
 
 Input: nums = [0,1]
 Output: [[0,1],[1,0]]
+
  * @author sinkar
  *
  */
@@ -22,8 +23,8 @@ public class Permutations {
 
 	public static void main(String[] args) {
 		Permutations p = new Permutations();
-		//int[] nums = new int[] {1, 2, 3};
-		int[] nums = new int[] {0};
+		int[] nums = new int[] {1, 2, 3};
+		//int[] nums = new int[] {0};
 		System.out.println(p.permute(nums));
 	}
 

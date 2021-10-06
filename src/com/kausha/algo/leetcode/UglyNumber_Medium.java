@@ -5,8 +5,32 @@ import java.util.HashSet;
 import java.util.Set;
 
 // https://leetcode.com/problems/ugly-number-ii/
-// Given an integer n, return the nth ugly number.
-// Ugly number is a positive number whose prime factors only include 2, 3, and/or 5.
+/**
+ * An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
+
+Given an integer n, return the nth ugly number.
+
+ 
+
+Example 1:
+
+Input: n = 10
+Output: 12
+Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+Example 2:
+
+Input: n = 1
+Output: 1
+Explanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
+ 
+
+Constraints:
+
+1 <= n <= 1690
+
+ * @author sinkar
+ *
+ */
 public class UglyNumber_Medium {
 
 	public static void main(String[] args) {

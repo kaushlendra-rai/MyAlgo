@@ -23,6 +23,7 @@ public class ReverseWordsInAString {
 			else
 				break;
 		
+		// reverse the string and exclude any extra space.
 		for(int i=s.length()-1; i >=leadingSpaceCounter ; i--) {
 			if(!((i == s.length()-1 && s.charAt(i) == ' ') || (s.charAt(i) == ' ' && s.charAt(i+1) == ' '))) {
 				sb.append(s.charAt(i));

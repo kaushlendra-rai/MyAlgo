@@ -12,8 +12,9 @@ public class SortRGBColorArray {
 	public static void main(String[] args) {
 		SortRGBColorArray sc = new SortRGBColorArray();
 		
+		int[] nums = new int[] {2,0,2,0,1,0};
 		//int[] nums = new int[] {2,0,2,1,1,0};
-		int[] nums = new int[] {2, 2, 2, 1, 1};
+		//int[] nums = new int[] {2, 2, 2, 1, 1};
 		//int[] nums = new int[] {2, 0, 1};
 		sc.sortColors(nums);
 		
@@ -28,10 +29,10 @@ public class SortRGBColorArray {
         
         while(counter <= end) {
         	if(nums[counter] == 0) {
-        		System.out.println("####  0");
+        		//System.out.println("####  0");
         		swap(nums, start++, counter++);
         	}else if(nums[counter] == 2) {
-        		System.out.println("####  2");
+        		//System.out.println("####  2");
         		swap(nums, end--, counter);
         	}else {
         		System.out.println("####  1");

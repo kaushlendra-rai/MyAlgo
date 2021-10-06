@@ -11,8 +11,8 @@ import java.util.Map;
 public class PrintAnagramsTogether {
 
 	public static void main(String[] args) {
-		//String[] strs = new String[]{"act","god","cat","dog","tac"};
-		String[] strs = new String[]{};
+		String[] strs = new String[]{"act","god","cat","dog","tac"};
+		//String[] strs = new String[]{};
 		
 		PrintAnagramsTogether pa = new PrintAnagramsTogether();
 		System.out.println(pa.Anagrams(strs));

@@ -22,13 +22,47 @@ public class PerfectSquare {
 		// System.out.println(ps.numSquares(13)); // 2
 		//System.out.println(ps.numSquares(1)); // 1
 		System.out.println(ps.numSquares(4)); // 1
+		System.out.println(ps.numSquares_itrMemo(4)); // 1
 	}
 
+	// Iterative bottom-up memoization with O(n) time & O(n) extra space.
+	// This one seems better than the 2D matrix solution.
+	public int numSquares_itrMemo(int n) {
+		if(n <= 3)
+			return n;
+		// We know that below are base cases and minimal in counts.
+		int[] mem = new int[n+1];
+		mem[0] = 0;
+		mem[1] = 1;
+		mem[2] = 2;
+		mem[3] = 3;
+		
+		for(int i=4; i <= n; i++) {
+			int sqrtNum = (int)Math.sqrt(i);
+			mem[i] = 1 + mem[i - sqrtNum * sqrtNum];
+		}
+		
+		return mem[n];
+	}
+	
+	public int numSquares_recurMemo(int n) {
+		if(n <= 3)
+			return n;
+		int numSquares = 0;
+		
+		for(int i=1; i*i <=n; i++) {
+			numSquares = Math.min(numSquares, 1 + numSquares_recurMemo(n-(i*i)));
+		}
+		
+		return numSquares;
+	}
+	
 	public int numSquares(int n) {
 		if(n == 1)
 			return 1;
 		
 		List<Integer> ps = new ArrayList<>();
+		// We try to find the maximum number whose square could be used to make up the number 'n'.
 		int num = 1;
 		while(num*num <= n) {
 			ps.add(num*num);

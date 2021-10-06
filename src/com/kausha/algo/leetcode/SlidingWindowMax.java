@@ -8,7 +8,8 @@ import java.util.Queue;
 
 // https://leetcode.com/problems/sliding-window-maximum/
 /**
- * You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right. 
+ * You are given an array of integers nums, there is a sliding window of size k which is moving from the
+ * very left of the array to the very right. 
  * You can only see the k numbers in the window. Each time the sliding window moves right by one position.
 
 Return the max sliding window.
@@ -63,7 +64,7 @@ public class SlidingWindowMax {
 
 	public int[] maxSlidingWindow(int[] nums, int k) {
 	    int[] result = new int[nums.length-k+1];
-	 
+	
 	    // Deque can be worked on both sides top and bottom.
 	    Deque<Integer> deque = new LinkedList<>();
 	    for(int i=0; i<nums.length; i++){
@@ -102,7 +103,7 @@ public class SlidingWindowMax {
         return slidingMax;
     }
 	
-	// O(nlogn)
+	// O(nlogk)
 	public int[] maxSlidingWindow_needsMoreImprovement(int[] nums, int k) {
 		// total number of max blocks = nums.length - k + 1
 		int[] slidingMax = new int[nums.length - k + 1];
@@ -126,7 +127,7 @@ public class SlidingWindowMax {
         return slidingMax;
     }
 
-	// O(n*n)
+	// O(n*k)
 	public int[] maxSlidingWindow_CorrectButNeedsPerformanceImprovement(int[] nums, int k) {
 		// total number of max blocks = nums.length - k + 1
 		int[] slidingMax = new int[nums.length - k + 1];
