@@ -4,8 +4,8 @@ package com.kausha.algo.ds;
 public class LargestBSTSizeInBinaryTree {
 
 	public static void main(String[] args) {
-		//TreeNode root = DSUtil.getBinaryTree();
-		TreeNode root = new TreeNode(10);
+		TreeNode root = DSUtil.getBinaryTree();
+		//TreeNode root = new TreeNode(10);
 		DSUtil.printTreeRecursively(root);
 		System.out.println("\n");
 		System.out.println("Size of largest BST: " + getSizeOfLargestBSTInBinaryTree(root));

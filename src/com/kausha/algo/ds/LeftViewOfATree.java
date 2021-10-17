@@ -3,16 +3,43 @@ package com.kausha.algo.ds;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.sun.org.apache.xerces.internal.dom.ChildNode;
-
 
 public class LeftViewOfATree {
 	public static void main(String[] args) {
 		TreeNode root = DSUtil.getBinaryTree();
 		DSUtil.printTreeRecursively(root);
+		System.out.println();
 		printLeftViewOfTheTree(root);
+		System.out.println();
+		printLeftViewOfTheTree_new(root);
 	}
 
+	// Here we use 'null' as a level order traversal delimiter.
+		private static void printLeftViewOfTheTree_new(TreeNode root) {
+			if(root == null)
+				return;
+			
+			Queue<TreeNode> queue = new LinkedList<>();
+			queue.offer(root);
+			queue.offer(null);
+			
+			while(!queue.isEmpty()) {
+				TreeNode node = queue.poll();
+				
+				if( node != null && node.right != null)
+					queue.offer(node.right);
+				if(node != null && node.left != null)
+					queue.offer(node.left);
+				
+				if(!queue.isEmpty() && queue.peek() == null) {
+					queue.poll(); // Poll the line delimiter 'null';
+					System.out.print(node.value + " ");
+					queue.offer(null);
+				}
+			}
+		}
+
+		
 	/**
 	 * We keep current and child nodes in Queues and add child nodes from right to left.
 	 * With this approach, we print the node if it is the last node in the queue.
@@ -36,7 +63,7 @@ public class LeftViewOfATree {
 				childQueue.offer(node.left);
 
 			if(queue.isEmpty()) {
-				System.out.println(node.value);
+				System.out.print(node.value + " ");
 				queue.addAll(childQueue);
 				childQueue.clear();
 			}

@@ -19,7 +19,7 @@ public class BSTPreorderTraversalIterative {
 		
 		while(!stack.isEmpty()) {
 			TreeNode node = stack.pop();
-			System.out.println(node.value);
+			System.out.print(node.value + " ");
 			if(node.right != null)
 				stack.push(node.right);
 			if(node.left != null)

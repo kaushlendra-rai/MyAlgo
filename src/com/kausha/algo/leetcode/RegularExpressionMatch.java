@@ -4,12 +4,50 @@ import java.util.HashMap;
 import java.util.Map;
 
 // https://leetcode.com/problems/regular-expression-matching/
+/**
+ * Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:
+
+'.' Matches any single character.​​​​
+'*' Matches zero or more of the preceding element.
+The matching should cover the entire input string (not partial).
+
+ 
+
+Example 1:
+
+Input: s = "aa", p = "a"
+Output: false
+Explanation: "a" does not match the entire string "aa".
+Example 2:
+
+Input: s = "aa", p = "a*"
+Output: true
+Explanation: '*' means zero or more of the preceding element, 'a'. Therefore, by repeating 'a' once, it becomes "aa".
+Example 3:
+
+Input: s = "ab", p = ".*"
+Output: true
+Explanation: ".*" means "zero or more (*) of any character (.)".
+Example 4:
+
+Input: s = "aab", p = "c*a*b"
+Output: true
+Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore, it matches "aab".
+Example 5:
+
+Input: s = "mississippi", p = "mis*is*p*."
+Output: false
+ 
+ 
+ * @author sinkar
+ *
+ */
 public class RegularExpressionMatch {
 
 	public static void main(String[] args) {
 		RegularExpressionMatch matcher = new RegularExpressionMatch();
-//		String str = "aab"; // True
-//		String pattern = "c*a*b";
+		String str = "aab"; // True
+		String pattern = "c*a*b";
 //		String str = "mississippi"; // False
 //		String pattern = "mis*is*p*.";
 //		String str = "aaa"; // Should be false
@@ -28,13 +66,14 @@ public class RegularExpressionMatch {
 //		String str = "aaba"; // False
 //		String pattern = "ab*a*c*a";
 		
-		String str = ""; // True
-		String pattern = "c*";
+		//String str = ""; // True
+		//String pattern = "c*";
 //		String str = "a"; // False
 //		String pattern = ".*..a*";
 //		String pattern = "ab*a";
 //		String str = "a"; // False
 		System.out.println(matcher.isMatch(str, pattern));
+		System.out.println(matcher.isMatch_recursive(str, pattern));
 	}
 
 	public boolean isMatch(String str, String pattern) {
@@ -77,10 +116,10 @@ public class RegularExpressionMatch {
 		
 		boolean firstMatch = !str.isEmpty() && (str.charAt(0) == pattern.charAt(0) || '.' == pattern.charAt(0));
 		if(pattern.length() > 1 && '*' == pattern.charAt(1)){
-			return (firstMatch && isMatch(str.substring(1), pattern)) || // Pattern matched teh current string.
-					isMatch(str, pattern.substring(2)); // Substring from '2' because we need to skip char along with the '*'.
+			return (firstMatch && isMatch_recursive(str.substring(1), pattern)) || // Pattern matched teh current string.
+					isMatch_recursive(str, pattern.substring(2)); // Substring from '2' because we need to skip char along with the '*'.
 		}else if (firstMatch)
-			return isMatch(str.substring(1), pattern.substring(1));
+			return isMatch_recursive(str.substring(1), pattern.substring(1));
 		
 		return false;
 	}

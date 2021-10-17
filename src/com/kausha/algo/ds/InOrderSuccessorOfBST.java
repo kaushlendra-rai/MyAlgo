@@ -6,11 +6,20 @@ public class InOrderSuccessorOfBST {
 		TreeNode node = DSUtil.getBinaryTree();
 		
 		// This below node actually exists in the tree which we intend to work on in above 'node' Tree
-		TreeNode node2 = node.right.left.left;
-		
+		// TreeNode node2 = node.right.left.right.right; // 26
+		TreeNode node2 = node.right.left.right.left; // 26
+		System.out.println(node2.value);
 		TreeNode result = inOrderSuccessor(node, node2);
 		if(result != null)
 			System.out.println("Successor : " + result.value);
+		else
+			System.out.println("Value does not exist in the tree");
+		
+		TreeNode node3 = node.right.right;
+		System.out.println(node3.value);
+		TreeNode result3 = inOrderSuccessor(node, node3);
+		if(result3 != null)
+			System.out.println("Successor : " + result3.value);
 		else
 			System.out.println("Value does not exist in the tree");
 	}

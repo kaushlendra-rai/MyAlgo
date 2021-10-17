@@ -14,6 +14,8 @@ public class KthLargestElementInBST_Iterative {
 			System.out.println("KthLargest = " + kthLargest.value);
 	}
 	
+	// Instead of normal left-node-right traversal, we do right-node-left traversal
+	// to find the nth largest because largest would to to the right.
 	private static TreeNode findKthLargest(TreeNode root, int i) {
 		if(root == null)
 			return null;
