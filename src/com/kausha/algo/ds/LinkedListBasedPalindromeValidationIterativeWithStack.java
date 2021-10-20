@@ -23,7 +23,8 @@ public class LinkedListBasedPalindromeValidationIterativeWithStack {
 			temp = temp.next.next;
 		}
 		
-		if(stack.size()%2 == 1)
+		//if(stack.size()%2 == 1)
+		if(temp != null)
 			node = node.next;
 		
 		while(node != null) {
