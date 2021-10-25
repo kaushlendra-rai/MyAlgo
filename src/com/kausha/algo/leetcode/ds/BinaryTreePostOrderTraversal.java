@@ -2,6 +2,7 @@ package com.kausha.algo.leetcode.ds;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 // https://leetcode.com/problems/binary-tree-postorder-traversal/
 public class BinaryTreePostOrderTraversal {
@@ -17,10 +18,32 @@ public class BinaryTreePostOrderTraversal {
 		root.right = node2;
 		node1.left = node3;
 		node1.right = node4;
-		System.out.println(pot.postorderTraversal(root));
+		System.out.println("Recursive Approach: " + pot.postorderTraversal(root));
+		
+		System.out.println("Itr approach: " + pot.postorderTraversal_itr(root));
 
 	}
-	
+	public List<Integer> postorderTraversal_itr(TreeNode root) {
+		Stack<TreeNode> stack1 = new Stack<>();
+		Stack<TreeNode> stack2 = new Stack<>();
+		List<Integer> result = new ArrayList<Integer>();
+		
+		stack1.push(root);
+		
+		while(!stack1.isEmpty()) {
+			TreeNode node = stack1.pop();
+			stack2.push(node);
+			if(node.left != null)
+				stack1.push(node.left);
+			if(node.right != null)
+				stack1.push(node.right);
+		}
+		
+		while(!stack2.isEmpty())
+			result.add(stack2.pop().val);
+			
+		return result;
+	}
 	public List<Integer> postorderTraversal(TreeNode root) {
 		ArrayList<Integer> nums = new ArrayList<>();
 		postOrder(root, nums);
