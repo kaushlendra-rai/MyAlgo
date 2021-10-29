@@ -44,9 +44,11 @@ public class CountContinuousSubArrayWithSumK {
 
 	// O(n): Prefix sum approach with HashMap
 	public int subarraySum(int[] nums, int k) {
-		// We are using Map instead of Set because there are chances where multiple sub-Arrays sum up to same value. In such cases, we need to 
+		// We are using Map instead of Set because there are chances where multiple sub-Arrays sum up to same value.
+		// In such cases, we need to 
 		// Include them in the count as well.
-		// The multiple values exists because the sum of some range equals to '0'. Hence their addition to sub-array does not increase/decrease the overall sum. 
+		// The multiple values exists because the sum of some range equals to '0'.
+		// Hence their addition to sub-array does not increase/decrease the overall sum. 
 		Map<Integer, Integer> map = new HashMap<>();
 		map.put(0, 1);
 		int sum = 0;

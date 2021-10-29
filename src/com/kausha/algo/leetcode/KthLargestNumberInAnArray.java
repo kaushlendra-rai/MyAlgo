@@ -42,9 +42,9 @@ public class KthLargestNumberInAnArray {
 		
 		while(mid != kthIndex) {
 			mid = partitionK(nums, start, end);
-			System.out.println("\nmid:" + mid);
-			for(int n : nums)
-				System.out.print(" " + n);
+			//System.out.println("\nmid:" + mid);
+			//for(int n : nums)
+			//	System.out.print(" " + n);
 			//System.out.println();
 			if(mid < kthIndex)
 				start = mid+1;
@@ -56,6 +56,8 @@ public class KthLargestNumberInAnArray {
         return nums[mid];
     }
 
+	// This method returns the index location of nums[start] position in the array.
+	// We do not actually sort the array. We are just fixing the position of this number in array.
 	private int partitionK(int[] nums, int start, int end) {
 		int num = nums[start];
 		while(start < end) {
@@ -71,7 +73,7 @@ public class KthLargestNumberInAnArray {
 				nums[end] = temp;
 			}
 		}
-		System.out.println("start:" + start + " , end: " + end);
+		//System.out.println("start:" + start + " , end: " + end);
 		return start;
 	}
 }

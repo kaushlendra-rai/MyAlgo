@@ -2,7 +2,8 @@ package com.kausha.algo.leetcode;
 
 // https://leetcode.com/problems/product-of-array-except-self/
 /**
- * Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+ * Given an integer array nums, return an array answer such that answer[i] is equal to the product of all 
+ * the elements of nums except nums[i].
 
 The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
 
@@ -13,11 +14,13 @@ Example 1:
 Input: nums = [1,2,3,4]
 Output: [24,12,8,6]
 
-The basic could be solved using a variable having a product of all numbers and for each index, dividing the product with the number at that index.
+The basic could be solved using a variable having a product of all numbers and for each index, 
+dividing the product with the number at that index.
 Follow up:
 
 Could you solve it in O(n) time complexity and without using division?
-Could you solve it with O(1) constant space complexity? (The output array does not count as extra space for space complexity analysis.)
+Could you solve it with O(1) constant space complexity? (The output array does not count as extra space 
+for space complexity analysis.)
 
  * @author sinkar
  *

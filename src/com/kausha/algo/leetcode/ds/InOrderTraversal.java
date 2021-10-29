@@ -35,6 +35,7 @@ public class InOrderTraversal {
 		
 		InOrderTraversal iot = new InOrderTraversal();
 		System.out.println(iot.inorderTraversal(b1));
+		System.out.println(iot.inorderTraversal_rec(b1));
 	}
 
 	public List<Integer> inorderTraversal(TreeNode root) {
@@ -43,18 +44,21 @@ public class InOrderTraversal {
         	return values;
         
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        while(root != null) {
+        	stack.push(root);
+        	root = root.left;
+        }
         
         while(!stack.isEmpty()) {
         	TreeNode node = stack.pop();
-        	TreeNode left = node.left;
+        	values.add(node.val);
         	
         	if(node.right != null) {
-        		stack.push(node.right);
-        	}
-
-        	if(node.left != null) {
-        		stack.push(node.left);
+        		TreeNode left = node.right;
+        		while(left != null) {
+                	stack.push(left);
+                	left = left.left;
+                }
         	}
         }
         
