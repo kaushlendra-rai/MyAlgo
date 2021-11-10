@@ -1,0 +1,59 @@
+HLD: Email Notification Service
+===============================
+
+Requirement: Design a notification service which could be used to deliver promotion emails. (Amazon)
+-------------------------------------------------------------------------------------------
+
+** You should ask for more clarity like what all kind of notifications (emails mostly)
+** Ask for scale.
+
+
+REST APIs:
+===========
+POST/GET/PUT : /notifications/templates
+---------------------------------------
+The payload of POST/PUT would mostly be the HTML email content which would be used to send emails. For personalization
+(like setting User Name), there would be some templateVariable e.g '$UserName' which would be replaced in email email 
+before sending the email to the user.
+ 
+The 'templates' are the email templates which are to be used for sending email campaign like 'promotion codes', 
+'offers', 'upcoming sale', etc.
+
+The templateID would be used in email campaigns to send email in various events. Same template could be used in multiple
+campaigns.
+
+
+POST/GET : /notifications/templates/{templateID}/campaign
+-------------------------------------------------------------
+A campaign is an event on which we intend to send the email. It could be something like a weekly/monthly promotion or 
+weekly newsletter about updates using an existing template.
+The POST body of the would contain a Map of emailID and value as another Map of <replaceableTokens, Values>:
+Map<String, Map<String, String>>
+e.g. {rai.kaushal@gmail.com, {$userName: Kaushlendra Rai, $company: SAS R&D}}
+Each payload can have upto 1000 email ids and related data for Bulk email requests.
+
+Now, the POST API accepts the request, validate the templateID.
+Each campaign MUST have it's own it's own table. We will create a new table with campaign name if it does not exists.
+Then add an entry of this new table(mostly campaign-name + some random 6 characters) in our campaigns table.
+Then add all the emailID prefixed with campaignID to a distributed cache. We pre-fixed the emailID with campaignID 
+in Distributed cache so that the emailID added for one campaign do not clash with the emailID added for another campaign.
+Once added, we trigger event with the above post payload, the current campaignName(the table name), templateID, etc.
+
+These events are consumed by our event consumers.
+We need to support idempotency of replaying the events. If the container/Lambda crashed while sending the email, we do not want 
+to re-send the notifications again to the users. 
+
+for each emailID:
+	Check if the emailID exists in the distributed cache. If it does, proceed with the flow else ignore that emailID.
+	Pull the templateID if not already cached.
+	Replace the tokens with values.
+	Send the email to SMTP server.
+	Add the entry to the 'campaignName' table.
+	Remove the entry of this emailID from the Distributed cache.
+	
+If the container crashed while the event was still getting processed, the event broker(Kafka/RabbitMQ) would re-sent the 
+event when the event consumer is available. Here our idempotent flow would be handy.
+It will ensure that we do not send the email more than once to the users for a given campaign. 
+
+In many cases, we need to retain the email sent to user for compliance purposes, in that case we also need to maintain the 
+email content in the table.
