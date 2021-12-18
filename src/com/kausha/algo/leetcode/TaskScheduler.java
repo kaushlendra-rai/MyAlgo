@@ -1,4 +1,4 @@
-package com.kausha.algo.leetcode.ds;
+package com.kausha.algo.leetcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,6 +63,7 @@ public class TaskScheduler {
 	public static void main(String[] args) {
 		TaskScheduler ts = new TaskScheduler();
 		//char[] tasks = new char[] {'A', 'A', 'A', 'B', 'B', 'B'}; // 8  ..A -> B -> idle -> A -> B -> idle -> A -> B
+		//System.out.println(ts.leastInterval(tasks, 2));
 		//char[] tasks = new char[] {'A', 'A', 'A', 'A', 'A', 'A', 'B', 'C', 'D', 'E', 'F', 'G'}; // 8
 		//char[] tasks = new char[] {'A', 'A', 'A', 'A', 'A'};
 		char[] tasks = new char[] {'A', 'B', 'C', 'D', 'E', 'A', 'B', 'C', 'D', 'E'}; // 8  ..A -> B -> idle -> A -> B -> idle -> A -> B
@@ -72,84 +73,38 @@ public class TaskScheduler {
 	public int leastInterval(char[] tasks, int n) {
 		if(n == 0)
 			return tasks.length;
-		int[] freq = new int[26];
-		for(char c : tasks)
-			freq[c-'A'] +=1;
+		Map<Character, Integer> map = new HashMap<>();
+		for(Character c : tasks)
+			map.put(c, map.getOrDefault(c, 0) + 1);
 		
-		Arrays.sort(freq);
-		return 0;
-	}
-	
-	
-	public int leastInterval_old(char[] tasks, int n) {
-		if(n == 0)
-			return tasks.length;
+		PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b-a);
+		maxHeap.addAll(map.values());
 		
-		Map<Character, Integer> taskMap = new HashMap<>();
-		for(char c : tasks)
-			taskMap.put(c, taskMap.getOrDefault(c, 0)+1);
-		
-		PriorityQueue<TaskData> pq = new PriorityQueue<>();
-		for(Character key : taskMap.keySet())
-			pq.offer(new TaskData(key, taskMap.get(key)));
-		int counter = 0;
-		List<TaskData> tdList = new ArrayList<>();
-		while(!pq.isEmpty()) {
-			TaskData td = pq.poll();
-			
-			if(td.distance % (n+1) == 0) {
-				td.count--;
-				td.distance = (td.distance % (n+1)) +1;
-				counter++;
-				System.out.print(td.character + " ");
-					
-				for(TaskData tdListData : tdList)
-					pq.offer(tdListData);
-
-				tdList = new ArrayList<>();
-				
-				if(td.count > 0)
-					pq.offer(td);
-			}else {
-				td.distance = (td.distance % (n+1)) +1;
-				tdList.add(td);
+		int cycles = 0;
+		// Now we check if the Heap is empty or not.
+		// The whole intent is to first pick the numbers with higher frequency till all number get exhausted.
+		while(!maxHeap.isEmpty()) {
+			List<Integer> usedNums = new ArrayList<>();
+			// We run loop for 'n+1' because the tasks themselves should not get repeated in 'n' distance. 
+			for(int i=0; i < n+1; i++) {
+				if(!maxHeap.isEmpty()) {
+					usedNums.add(maxHeap.poll());
+				}
 			}
 			
-			if(pq.isEmpty() && tdList.size() > 0) {
-				// Special handling for last element having single type
-				if(tdList.size() == 1) {
-					counter += tdList.get(0).count * (n+1);
-					break;
-				}
-				
-				for(TaskData tdListData : tdList) {
-					tdListData.distance = (tdListData.distance % (n+1)) +1;
-					pq.offer(tdListData);
-				}
-				tdList = new ArrayList<>();
-				
-				// Case where we cannot get subsequent characters/tasks available due to 'n', we add fillers like 'idle'
-				counter++;
-				System.out.print("idle ");
+			// If the picked numbers can still be used and put them back on heap.
+			// Given it has been used once, decrement the available frequency by 1
+			for(int used : usedNums) {
+				if(--used > 0)
+					maxHeap.add(used);
 			}
+			
+			// If the Heap is empty, it implies that all the elements have been used in this flow.
+			// If not, it implies that the n+1 elements picked from teh heap have been added successfully or else
+			// compensated with extra sleeps.
+			cycles += maxHeap.isEmpty() ? usedNums.size() : n+1;
 		}
 		
-        return counter;
-    }
-}
-
-class TaskData implements Comparable<TaskData>{
-	char character;
-	int count;
-	int distance;
-	int lastCounter;
-	public TaskData(char c, int count) {
-		this.character = c;
-		this.count =  count;
-	}
-	
-	@Override
-	public int compareTo(TaskData o) {
-		return o.count - this.count;
+		return cycles;
 	}
 }
