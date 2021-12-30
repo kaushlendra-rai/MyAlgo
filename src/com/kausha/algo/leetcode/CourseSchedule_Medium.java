@@ -26,10 +26,10 @@ public class CourseSchedule_Medium {
 	public static void main(String[] args) {
 		CourseSchedule_Medium cs = new CourseSchedule_Medium();
 		//int[][] prerequisites = new int[][] {{1,0}}; // numCourses=2 Ans 0, 1 (in that order)
-		//int[][] prerequisites = new int[][] {{1,0}, {2, 0}, {3, 1}, {3, 2}}; // numCourses=4 Ans 0, 1 (in that order)
-		// int numCourses = 4;
-		int[][] prerequisites = new int[][] {{1,0}, {0, 1}}; // numCourses=2 Ans 0, 1 (in that order)
-		int numCourses = 2;
+		int[][] prerequisites = new int[][] {{1,0}, {2, 0}, {3, 1}, {3, 2}}; // numCourses=4 Ans 0, 1 (in that order)
+		 int numCourses = 4;
+//		int[][] prerequisites = new int[][] {{1,0}, {0, 1}}; // numCourses=2 Ans 0, 1 (in that order)
+//		int numCourses = 2;
 		//int[][] prerequisites = new int[][] {{0,10},{3,18},{5,5},{6,11},{11,14},{13,1},{15,1},{17,4}};
 		//int numCourses = 20;
 		System.out.println(cs.canFinish(numCourses, prerequisites));

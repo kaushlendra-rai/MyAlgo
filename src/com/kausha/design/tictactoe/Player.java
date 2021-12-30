@@ -4,6 +4,8 @@ public class Player {
 
 	String id;
 	String name;
+	
+	// Value '1'for Player1 & '-1'for player 2
 	int moveValue;
 	
 	public void setMoveValue(int moveValue) {

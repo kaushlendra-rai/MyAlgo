@@ -3,6 +3,7 @@ package com.kausha.algo.leetcode.ds;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class BinaryTreeSerializeDeserialize {
 
 	public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class BinaryTreeSerializeDeserialize {
 		b3.left = b4;
 		b3.right = b5;
 		
-		String ser = codec.serialize(null);
+		String ser = codec.serialize(b1);
 		System.out.println("Serialized BST: " + ser);
 		
 		TreeNode dser = codec.deserialize(ser);
@@ -68,36 +69,44 @@ class CodecB {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-    	if("#".contentEquals(data))
+    	if (data == null || data == "" || data == "#")
     		return null;
-    	String[] vals = data.split(" ");
-    	Queue<TreeNode> queue = new LinkedList<>();
-    	Queue<TreeNode> children = new LinkedList<>();
-    	TreeNode root = new TreeNode(Integer.parseInt(vals[0]));
-    	queue.offer(root);
     	
-    	for(int i=1; i < vals.length; i++) {
-    		TreeNode node = queue.poll();
+    	Queue<TreeNode> queue1 = new LinkedList<>();
+    	Queue<TreeNode> queue2 = new LinkedList<>();
+    	
+    	String[] vals = data.split(" ");
+    	int counter = 0;
+    	TreeNode root = null;
+    	if(!"#".equals(vals[counter])) {
+    		root = new TreeNode(Integer.parseInt(vals[counter]));
+    		queue1.offer(root);
+    	}
+    	
+    	
+    	while(!queue1.isEmpty()) {
+    		TreeNode node = queue1.poll();
+    	
     		TreeNode left = null;
-    		if(!"#".contentEquals(vals[i])) {
-    			left = new TreeNode(Integer.parseInt(vals[i]));
-    			children.offer(left);
-    		}
-    		node.left = left;
-    		i++;
-    		TreeNode right = null;
-    		if(!"#".contentEquals(vals[i])) {
-    			right = new TreeNode(Integer.parseInt(vals[i]));
-    			children.offer(right);
-    		}
-    		node.right = right;
+    		if(!"#".equals(vals[++counter])) {
+        		left = new TreeNode(Integer.parseInt(vals[counter]));
+        		node.left= left;
+        		queue2.offer(left);
+        	}
     		
-    		if(queue.isEmpty()) {
-    			queue = children;
-    			children = new LinkedList<>();
+    		TreeNode right = null;
+    		if(!"#".equals(vals[++counter])) {
+        		right = new TreeNode(Integer.parseInt(vals[counter]));
+        		node.right= right;
+        		queue2.offer(right);
+        	}
+    		
+    		if(queue1.isEmpty() && !queue2.isEmpty()) {
+    			queue1 = queue2;
+    			queue2 = new LinkedList<>();
     		}
     	}
     	
-        return root;
+    	return root;
     }
 }

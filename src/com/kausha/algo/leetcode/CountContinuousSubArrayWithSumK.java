@@ -39,7 +39,7 @@ public class CountContinuousSubArrayWithSumK {
 		
 		int[] nums5 = new int[] {1, 1, 1};
 		System.out.println(sa.subarraySum(nums5, 2));
-		//System.out.println(sa.subarraySum_On_PositiveNumbersOnly(nums2, 7));
+		System.out.println(sa.subarraySum_On_PositiveNumbersOnly(nums4, 3));
 	}
 
 	// O(n): Prefix sum approach with HashMap
@@ -86,6 +86,9 @@ public class CountContinuousSubArrayWithSumK {
 				firstIdx++;
 			}
 		}
+		
+		if(sum == k)
+			count++;
 		
 		return count;
 	}

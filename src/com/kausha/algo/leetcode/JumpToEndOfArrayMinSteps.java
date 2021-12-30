@@ -31,12 +31,12 @@ public class JumpToEndOfArrayMinSteps {
 	public static void main(String[] args) {
 		//int[] nums = new int[]{2, 3, 1, 1, 4};  // 2
 		//int[] nums = new int[]{2, 3, 1, 1, 2, 4, 2, 0, 1, 1};  // 4
-		int[] nums = new int[]{0, 3, 1, 1, 4};  // 0
+		//int[] nums = new int[]{0, 3, 1, 1, 4};  // 0
 		//int[] nums = new int[]{1, 0, 3, 1, 1, 4};  // 0
-		//int[] nums = new int[]{2,3,0,1,4};  // 0
+		int[] nums = new int[]{2,3,0,1,4};  // 0
 		JumpToEndOfArrayMinSteps cj = new JumpToEndOfArrayMinSteps();
 		System.out.println(cj.jump(nums));
-	}
+	} 
 	
 	public int jump(int[] nums) {
 		int maxCurr = 0;

@@ -34,7 +34,7 @@ public class KthLargestNumberInAnArray {
 	}
 
 	// We solve it using partitioning
-	public int findKthLargest(int[] nums, int k) {		
+	public int findKthLargest(int[] nums, int k) {
 		int kthIndex = nums.length - k;
 		int start = 0;
 		int end = nums.length -1;

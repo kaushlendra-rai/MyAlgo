@@ -13,7 +13,8 @@ public class Game {
 	// Each game is unique for reference. 
 	String gameID;
 	
-	int gridSquareSize; 
+	int gridSquareSize;
+	int[][] grid;
 	Board board;
 	Player player1;
 	Player player2;
@@ -22,11 +23,13 @@ public class Game {
 	
 	int[] rowSum;
 	int[] columnSum;
-	int[] fwdDiagonalSum;
-	int[] revDiagonalSum;
+	int fwdDiagonalSum;
+	int revDiagonalSum;
+	
+	int totalMoves;
 	
 	// This should get evaluated with every move.
-	boolean gameStatus;
+	GameStatus status;
 	
 	public Game(int gridSquareSize, Player player1, Player player2) {
 		gameID = UUID.randomUUID().toString();
@@ -41,8 +44,8 @@ public class Game {
 		this.board = new Board(gridSquareSize);
 		this.rowSum = new int[gridSquareSize];
 		this.columnSum = new int[gridSquareSize];
-		this.fwdDiagonalSum = new int[gridSquareSize];
-		this.revDiagonalSum = new int[gridSquareSize];
+		this.grid = new int[gridSquareSize][gridSquareSize];
+		status = GameStatus.InProgress;
 	 }
 	 
 	 public Player getNextMovePlayer() {
@@ -69,21 +72,46 @@ public class Game {
 	 * @throws InvalidMoveException
 	 */
 	public GameStatus move(Move move) throws InvalidMoveException{
-		// Validate move. Check for boundary conditions and that if the block is not already occupied.
-		// Not doing it here for now.
+		// Validate move.
+		validate(move);
 		
+		grid[move.getBlock().getY()][move.getBlock().getX()] = move.getPlayer().getMoveValue();
 		rowSum[move.getBlock().getY()] += move.getPlayer().getMoveValue();
 		columnSum[move.getBlock().getX()] += move.getPlayer().getMoveValue();
-		GameStatus status = GameStatus.InProgress;
-		// Set for diagonal if and only if the move is on the diagonal path blocks.
-		// Not doing it for now.
 		
-		if(rowSum[move.getBlock().getY()] == gridSquareSize || columnSum[move.getBlock().getX()] == gridSquareSize) {
-			// Check for diagonals too
+		// Set for diagonal if and only if the move is on the diagonal path blocks.
+		if(move.getBlock().getX() == move.getBlock().getY()) {
+			fwdDiagonalSum += move.getPlayer().getMoveValue();
+		}
+		// Reverse Diagonal
+		if(move.getBlock().getX() + move.getBlock().getY() == gridSquareSize + 1) {
+			revDiagonalSum += move.getPlayer().getMoveValue();
+		}
+		
+		totalMoves++;
+		
+		// Check for Rows and columns for win.
+		if(rowSum[move.getBlock().getY()] == gridSquareSize || columnSum[move.getBlock().getX()] == gridSquareSize ||
+				fwdDiagonalSum == gridSquareSize || revDiagonalSum == gridSquareSize) {
 			winner = move.player;
 			status = GameStatus.Winner;
 		}
 		
+		if(totalMoves == gridSquareSize * gridSquareSize)
+			status = GameStatus.Draw;
+		
 		return status;
+	}
+
+	private void validate(Move move) throws InvalidMoveException {
+		// Ensure that the move specified is within the grid and that the block is not already occupied.
+		if(move.getBlock().getY() < 0 || move.getBlock().getY() >= gridSquareSize || move.getBlock().getX() < 0 || move.getBlock().getX() >= gridSquareSize)
+			throw new InvalidMoveException("Move outside of grid");
+		
+		if(grid[move.getBlock().getY()][move.getBlock().getX()] != 0)
+			throw new InvalidMoveException("Grid node already occupied.");
+		
+		if(!status.equals(GameStatus.InProgress))
+			throw new InvalidMoveException("Game has already ended.");
 	}
 }

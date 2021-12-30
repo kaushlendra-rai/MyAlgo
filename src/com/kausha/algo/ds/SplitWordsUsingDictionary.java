@@ -9,9 +9,9 @@ public class SplitWordsUsingDictionary {
 	public static void main(String[] args) {
 		TrieDataStructure dictionary = getDictionary();
 		
-		//String word = "iamhero";
+		String word = "iamhero";
 		//String word = "iamheros";
-		String word = "sonuisahero";
+		//String word = "sonuisahero";
 		//String word = "hero";
 		
 		List<String> wordList = getSplitWordList(dictionary, word);
@@ -23,45 +23,34 @@ public class SplitWordsUsingDictionary {
 			return Collections.EMPTY_LIST;
 		
 		List<String> wordList = new LinkedList<String>();
-		getWords(dictionary, dictionary, word, 0, wordList);
+		splitWordList(dictionary, dictionary, word, 0, wordList);
 		
 		return wordList;
 	}
 	
-	private static boolean getWords(TrieDataStructure root,TrieDataStructure dictionary, String word, int index, List<String> wordList){
-		
-		// This would be a case where there is NO MATCH FOUND for a word and searching for word reached the end of word-length
-		if(word.length() == index)
+	private static boolean splitWordList(TrieDataStructure dict, TrieDataStructure node, String word, int idx, List<String> wordList) {
+		if(idx == word.length())
 			return false;
 		
-		String character = word.substring(index, index+1);
-		TrieDataStructure term = dictionary.getNodes().get(character);
+		String nextChar = word.substring(idx, idx+1);
+		TrieDataStructure newNode = node.getNodes().get(nextChar);
 		
-		// There is no match for the character in the dictionary at current level 
-		if(term == null)
+		if(newNode == null) // No match found
 			return false;
-		else{
-			// Check if it is a word
-			if(term.isWord()){
-				// Check if all the characters have matched by this time.
-				// If they have, we have found the word list.
-				// Below is the terminal condition for the recursion
-				if(index == word.length()-1){
-					wordList.add(term.getCompleteWord());
-					return true;
-				}
-				else if(getWords(root, root, word, index+1, wordList)){
-					// This section would be entered only when the last word in the input
-					// string matched the dictionary term.
-					wordList.add(term.getCompleteWord());
-					return true;
-				}
-			}else if(getWords(root, term, word, index+1, wordList)){
+		
+		if(newNode.isWord()) {
+			if(idx == word.length()-1) {
+				wordList.add(newNode.getCompleteWord());
+				return true;
+			}
+			
+			if(splitWordList(dict, dict, word, idx+1, wordList)) {
+				wordList.add(newNode.getCompleteWord());
 				return true;
 			}
 		}
-		
-		return false;
+
+		return splitWordList(dict, newNode, word, idx+1, wordList);
 	}
 	
 	private static TrieDataStructure getDictionary() {

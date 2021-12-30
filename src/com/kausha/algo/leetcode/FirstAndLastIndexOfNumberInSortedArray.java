@@ -4,10 +4,10 @@ package com.kausha.algo.leetcode;
 public class FirstAndLastIndexOfNumberInSortedArray {
 
 	public static void main(String[] args) {
-		int[] nums = new int[] {5, 7, 7, 8, 8, 10};
+		int[] nums = new int[] {5, 5, 7, 7, 8, 8, 10};
 		
 		FirstAndLastIndexOfNumberInSortedArray firstLast = new FirstAndLastIndexOfNumberInSortedArray();
-		int[] idx = firstLast.searchRange(nums, 8);
+		int[] idx = firstLast.searchRange(nums, 5);
 		System.out.println("Range: " + idx[0] + " , " + idx[1]);
 	}
 	

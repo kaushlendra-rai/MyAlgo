@@ -6,27 +6,60 @@ import java.util.List;
 public class DivideArrayInTwoPartsWithEqualSum {
 	public static void main(String[] args) {
 		//int[] arr = {1, 2, 3, 4, 5, 6, 21};
-		int[] arr = {2, 5, 6, 7, 10};
+		//int[] arr = {2, 5, 6, 7, 10};
 		//int[] arr = {1, 5, 6};
+		int[] arr = {1, 2, 3, 4, 5, 7};
 		
 		List<Integer> firstHalf = divideArrayInEqualParts(arr);
 		System.out.println(" DP firstHalf = " + firstHalf);
 		
 		List<Integer> firstHalfBasic = divideArrayInEqualParts_Basic_Exponential(arr);
 		System.out.println(" Basic firstHalf = " + firstHalfBasic);
+		
+		List<Integer> firstHalfBasic2 = divideArrayInEqualParts_Basic_Exponential2(arr);
+		System.out.println(" Basic firstHalf = " + firstHalfBasic2);
 	}
 	
-	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] nums) {
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] arr) {
+		long sum = 0;
+		for(int num : arr)
+			sum += num;
+		
+		if(sum %2 == 1)
+			return new ArrayList<Integer>();
+		
+		return divideArrayInEqualParts_Basic_Exponential(arr, sum/2, 0, 0);
+		//return null;
+	}
+	
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] arr, long half, long sum, int idx) {
+		if(sum == half) {
+			System.out.println("sum: "+ sum);
+			List<Integer> halfArr = new ArrayList<>();
+			return halfArr; 
+		}else if(sum > half || idx == arr.length)
+			return null;
+		
+		List<Integer> data = divideArrayInEqualParts_Basic_Exponential(arr, half, sum + arr[idx], idx+1);
+		if(data == null) {
+			data = divideArrayInEqualParts_Basic_Exponential(arr, half, sum, idx+1);
+		}else {
+			data.add(arr[idx]);
+		}
+		return data;
+	}
+	
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential2(int[] nums) {
 		int sum = 0;
 		for(int num : nums)
 			sum += num;
 		int half = sum/2;
 		
-		List<Integer> result = divideArrayInEqualParts_Basic_Exponential(nums, 0, half, new ArrayList<Integer>(), 0);
+		List<Integer> result = divideArrayInEqualParts_Basic_Exponential2(nums, 0, half, new ArrayList<Integer>(), 0);
 		return result;
 	}
 	
-	private static List<Integer> divideArrayInEqualParts_Basic_Exponential(int[] nums, int idx, int sum, List<Integer> currNums, int currSum) {
+	private static List<Integer> divideArrayInEqualParts_Basic_Exponential2(int[] nums, int idx, int sum, List<Integer> currNums, int currSum) {
 		if(idx >= nums.length)
 			return null;
 		List<Integer> newList = new ArrayList<>(currNums);
@@ -35,7 +68,7 @@ public class DivideArrayInTwoPartsWithEqualSum {
 			return newList;
 		}
 		// Don't include the current number in the sum.
-		List<Integer> excluded = divideArrayInEqualParts_Basic_Exponential(nums, idx +1, sum, newList, currSum);
+		List<Integer> excluded = divideArrayInEqualParts_Basic_Exponential2(nums, idx +1, sum, newList, currSum);
 		if (excluded != null){
 			return excluded;
 		}
@@ -44,7 +77,7 @@ public class DivideArrayInTwoPartsWithEqualSum {
 		newList = new ArrayList<>(currNums);
 		newList.add(nums[idx]);
 		currSum += nums[idx];
-		List<Integer> included = divideArrayInEqualParts_Basic_Exponential(nums, idx  +1, sum, newList, currSum);
+		List<Integer> included = divideArrayInEqualParts_Basic_Exponential2(nums, idx  +1, sum, newList, currSum);
 		if (included != null){
 			return included;
 		}
