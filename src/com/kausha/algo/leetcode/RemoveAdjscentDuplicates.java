@@ -49,6 +49,8 @@ public class RemoveAdjscentDuplicates {
 		System.out.println(new RemoveAdjscentDuplicates().removeDuplicates("aaaaaaaaa"));
 		System.out.println(new RemoveAdjscentDuplicates().removeDuplicates("azxxzy"));
 		
+		System.out.println(new RemoveAdjscentDuplicates().removeDuplicates("azxxxzy"));
+		
 	}
 
 	public String removeDuplicates(String str) {

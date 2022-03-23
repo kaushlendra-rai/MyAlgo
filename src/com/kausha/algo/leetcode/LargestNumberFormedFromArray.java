@@ -26,6 +26,7 @@ public class LargestNumberFormedFromArray {
 				return ("" + two + one).compareTo("" + one + two);
 			}
 		});
+		
 		// Special handling where the nums array has only '0'. In such cases the start '0' index itself will be having '0'
 		// So, we return only string '0' directly.
 		if(nums[0] == 0)

@@ -4,7 +4,9 @@ public class ReverseDoublyLinkedList {
 	public static void main(String[] args) {
 		DoublyLinkedListNode dll = DSUtil.generateDoubblyLinkedList();
 		DSUtil.printDLL(dll);
+		//DoublyLinkedListNode reversedDLL = reverseDLL(dll);
 		DoublyLinkedListNode reversedDLL = reverseDLL(dll);
+		//DoublyLinkedListNode reversedDLL = reverseDLL2(dll);
 		DSUtil.printDLL(reversedDLL);
 	}
 	
@@ -21,5 +23,19 @@ public class ReverseDoublyLinkedList {
 		}
 		
 		return dll;
+	}
+	
+	private static DoublyLinkedListNode reverseDLL2(DoublyLinkedListNode dll) {
+		DoublyLinkedListNode prev = null;
+		while(dll != null){
+			DoublyLinkedListNode temp = dll.next;
+			dll.next = prev;
+			dll.prev = temp;
+			
+			prev = dll;
+			dll = temp;
+		}
+		
+		return prev;
 	}
 }

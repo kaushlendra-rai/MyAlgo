@@ -9,13 +9,13 @@ import java.util.Set;
 public class LongestSubstringWithoutRepeatingCharacter {
 
 	public static void main(String[] args) {
-		 String str = "abcabcbb";
+		 //String str = "abcabcbb";
 		//String str = "";
 		//String str = "bbbbb";
-		//String str = "pwwkew";
+		//String str = "pwwkewe";
 		//String str = "b";
 		//String str = "abc";
-		//String str = "ohomm";
+		String str = "ohmhmabcde";
 		LongestSubstringWithoutRepeatingCharacter ls = new LongestSubstringWithoutRepeatingCharacter();
 		System.out.println(str);
 		System.out.println("Length: " + ls.lengthOfLongestSubstring(str));
@@ -23,6 +23,37 @@ public class LongestSubstringWithoutRepeatingCharacter {
 	}
 
 	public int lengthOfLongestSubstring(String s) {
+		int[] visited = new int[26];
+		int maxLen = 0;
+		
+		// Given that a character can have index location '0' if it starts, we must set the default index to -1 
+		// to indicate that it has not been visited.
+		for(int i=0; i<26; i++)
+			visited[i] = -1;
+		
+		int len = 0;
+		int idx = 0;
+		int start = 0;
+
+		while(idx < s.length() && start <= idx) {
+			if(visited[s.charAt(idx) - 'a'] == -1) {
+				visited[s.charAt(idx) - 'a'] = idx;
+			}else {
+				start = visited[s.charAt(idx) - 'a']+1;
+				visited[s.charAt(idx) - 'a'] = idx;
+			}
+			
+			len = idx - start;
+			if(len  > maxLen) 
+				maxLen = len;
+			idx++;
+		}
+		
+		return maxLen+1;
+	}
+	
+	// Wrong, does not works for String str = "ohmhmabcde";
+	public int lengthOfLongestSubstring_wrong(String s) {
 		boolean[] visited = new boolean[26];
 		int maxLen = 0;
 		

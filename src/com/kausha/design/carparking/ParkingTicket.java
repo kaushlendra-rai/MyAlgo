@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class ParkingTicket {
 
-	CustomerVehicle vehical;
-	ParkingLot parkingLot;
-	Customer customerId;
+	AbstractVehical vehical;
+	ParkingSpot parkingSpot;
+	Customer customer;
 	
 	Date startTime;
 	Date endTime;

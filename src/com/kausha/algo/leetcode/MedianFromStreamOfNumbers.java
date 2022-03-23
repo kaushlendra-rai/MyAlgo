@@ -45,8 +45,8 @@ class MedianFinder {
     }
     
     public double findMedian() {
-    	System.out.println(maxHeap.size());
-    	System.out.println(minHeap.size());
+    	//System.out.println(maxHeap.size());
+    	//System.out.println(minHeap.size());
         if(maxHeap.size() != minHeap.size()) {
         	return maxHeap.peek();
         }else {

@@ -42,6 +42,7 @@ public class LetterCombinationsOfPhoneNumber {
 		for(int i=0; i < digits.length(); i++) {
 			List<String> temp = new ArrayList<>();
 			String[] characters = numMap.get(digits.substring(i, i+1));
+			// Processing the numbers for the first time.
 			if(combinations.size() == 0) {
 				for(int k=0; k< characters.length; k++)
 					temp.add(characters[k]);

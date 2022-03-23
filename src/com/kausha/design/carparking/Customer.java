@@ -17,5 +17,5 @@ public class Customer {
 	String idType;
 	String idValue;
 	
-	String mobileNumber;
+	String mobileNumber; // This could be used to send an bill amount, send parking location details, etc. to the customer.
 }

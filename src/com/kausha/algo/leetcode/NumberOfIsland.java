@@ -25,12 +25,12 @@ public class NumberOfIsland {
 
 	public static void main(String[] args) {
 		NumberOfIsland noi = new NumberOfIsland();
-//		char[][] grid = new char[][] { // Ans 1
-//			{'1','1','1','1','0'},
-//			{'1','1','0','1','0'},
-//			{'1','1','0','0','0'},
-//			{'0','0','0','0','0'}
-//		};
+		char[][] grid = new char[][] { // Ans 1
+			{'1','1','1','1','0'},
+			{'1','1','0','1','0'},
+			{'1','1','0','0','0'},
+			{'0','0','0','0','0'}
+		};
 		
 //		char[][] grid = new char[][] { // Ans 3
 //			{'1','1','0','0','0'},
@@ -38,9 +38,9 @@ public class NumberOfIsland {
 //			{'0','0','1','0','0'},
 //			{'0','0','0','1','1'}
 //		};
-		char[][] grid = new char[][] { // Ans 0
-			{'0'}
-		};
+//		char[][] grid = new char[][] { // Ans 0
+//			{'0'}
+//		};
 		System.out.println(noi.numIslands(grid));
 	}
 
@@ -55,13 +55,7 @@ public class NumberOfIsland {
 					visitGrid(grid, island, i, j, counter);
 				}
 
-		int maxIslandCount = 0;
-		for(int i=0; i< grid.length; i++)
-			for(int j=0; j < grid[0].length; j++)
-				if(island[i][j]> maxIslandCount)
-					maxIslandCount = island[i][j];
-
-        return maxIslandCount;
+        return counter;
     }
 
 	private void visitGrid(char[][] grid, int[][] island, int i, int j, int counter) {

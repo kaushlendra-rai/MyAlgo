@@ -28,6 +28,8 @@ public class RemoveKNumsToFormSmallestNum {
 		System.out.println(rn.removeKdigits("1234567", 3)); // 1234
 		System.out.println(rn.removeKdigits("112", 1)); // 11
 
+		System.out.println(rn.removeKdigits("134", 1)); // 11
+		System.out.println(rn.removeKdigits("143", 1)); // 11
 	}
 
 	public String removeKdigits(String num, int k) {

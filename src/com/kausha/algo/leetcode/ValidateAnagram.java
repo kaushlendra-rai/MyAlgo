@@ -28,6 +28,9 @@ public class ValidateAnagram {
 
 	}
 
+	// An alternate way is to have an array of 26 size and get frequency of each character for string1.
+	// then for second string, deduct the frequency for each character.
+	// If the array is eventually '0' for all 26, it is an anagram, else not.
 	public boolean isAnagram(String s, String t) {
 		if(s.length() != t.length())
 			return false;

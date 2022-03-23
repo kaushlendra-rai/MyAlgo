@@ -45,6 +45,9 @@ public class ReorganizeStrings {
 		}
 		
 		StringBuilder sb = new StringBuilder();
+		
+		// We maintain the current max in tmp and keep it out of the MaxHeap so that while working, we do not get
+		// the same character consecutively.
 		CharFreq tmp = null;
 		while(!maxHeap.isEmpty()) {
 			//System.out.println("maxHeap.size: " + maxHeap.size());

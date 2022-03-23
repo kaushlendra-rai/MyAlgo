@@ -108,11 +108,7 @@ public class SlidingWindowMax {
 		// total number of max blocks = nums.length - k + 1
 		int[] slidingMax = new int[nums.length - k + 1];
 
-		Queue<Integer> queue = new PriorityQueue<>(k, new Comparator<Integer>(){
-			public int compare(Integer int1, Integer int2) {
-				return int2-int1;
-			}
-		});
+		Queue<Integer> queue = new PriorityQueue<>(k, (int1, int2) -> int2-int1);
 		int counter = 0;
 		for(int i=0; i<nums.length; i++) {
 			if(i < k-1)

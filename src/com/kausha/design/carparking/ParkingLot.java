@@ -1,23 +1,35 @@
 package com.kausha.design.carparking;
 
+import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 public class ParkingLot {
+	int siteId;
+	int zipcode; // Zipcode can be helpful in searching parking lots through an app.
+	
+	int rows;
+	int columns;
+	int floors;
 
-	// Check if parking is supported only for 'Cars' or even extended to Bikes, Cars, Trucks, cycle, etc.
-	private Vehicle type;
+	ConcurrentMap<VehicalType, Stack<ParkingSpot>> availableParking = new ConcurrentHashMap<>();
+	ConcurrentMap<String, ParkingSpot> reservations = new ConcurrentHashMap<>();
+	// All available parking spots for each category should be maintained in a Stack/Queue
+	public ParkingSpot bookParkingSpot(Vehicle vehicle, Customer customer) {
+		Stack<ParkingSpot> availableSpots = availableParking.get(vehicle.getType());
+		
+		ParkingSpot spot = null;
+		if(!availableSpots.isEmpty())
+			spot = availableSpots.pop();
+		
+		reservations.put(vehicle.getRegistrationNumber(), spot);
+		return spot;
+	}
 	
-	// BuildingId in case if parking is spread across multiple buildings 
-	private String siteId;
-	private int x;
-	private int y;
-	private int floor;
-	
-	boolean handicapEnabled;
-	
-	// It might be required to disable certain parking lot, floor or the entire building due to maintenance reasons.
-	// Hence such parking lots must not be visible to the system.
-	boolean active;
-	
-	// Unique identifier in case of split parking at same location (One on top of other mechanically)
-	private int id;
-
+	public void releaseParkingSpot(ParkingTicket ticket) {
+		ParkingSpot spot = ticket.parkingSpot;
+		Stack<ParkingSpot> availableSpots = availableParking.get(spot.getType());
+		availableSpots.push(spot);
+		reservations.remove(ticket.vehical.registrationNumber);
+	}
 }

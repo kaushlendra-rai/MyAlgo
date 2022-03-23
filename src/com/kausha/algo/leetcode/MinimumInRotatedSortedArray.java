@@ -7,10 +7,11 @@ public class MinimumInRotatedSortedArray {
 		MinimumInRotatedSortedArray rs = new MinimumInRotatedSortedArray();
 		// int[] nums = new int[] {3, 4, 5, 1, 2};
 		//int[] nums = new int[] {2, 3, 4, 5, 1};
-		//int[] nums = new int[] {2, 3, 4, 5};
+		int[] nums = new int[] {2, 3, 4, 5};
 		//int[] nums = new int[] {2, 1};
 		//int[] nums = new int[] {4,5,6,7,0,1,2};
-		int[] nums = new int[] {11,13,15,17};
+		//int[] nums = new int[] {11,13,15,17};
+		
 		System.out.println(rs.findMin(nums));
 	}
 

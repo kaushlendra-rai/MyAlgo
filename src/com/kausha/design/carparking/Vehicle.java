@@ -2,9 +2,7 @@ package com.kausha.design.carparking;
 
 public interface Vehicle {
 
-	String getType();
+	VehicalType getType();
 	
-	String getDescription();
-	
-	double getHourlyPrice();
+	String getRegistrationNumber();
 }
