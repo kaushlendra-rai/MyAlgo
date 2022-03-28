@@ -4,7 +4,7 @@ public class ParkingService {
 	
 	// Check if a slot is available for the given type.
 	// If available, issue a ticket to the customer corresponding to the Registration number of the vehicle.
-	public ParkingTicket reserveParkingSpot(AbstractVehical vehical) {
+	public ParkingTicket reserveParkingSpot(AbstractVehicle vehical) {
 		
 		return null;
 	}

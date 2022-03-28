@@ -12,7 +12,7 @@ public class ParkingLot {
 	int columns;
 	int floors;
 
-	ConcurrentMap<VehicalType, Stack<ParkingSpot>> availableParking = new ConcurrentHashMap<>();
+	ConcurrentMap<VehicleType, Stack<ParkingSpot>> availableParking = new ConcurrentHashMap<>();
 	ConcurrentMap<String, ParkingSpot> reservations = new ConcurrentHashMap<>();
 	// All available parking spots for each category should be maintained in a Stack/Queue
 	public ParkingSpot bookParkingSpot(Vehicle vehicle, Customer customer) {

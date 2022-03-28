@@ -1,8 +1,12 @@
 package com.kausha.design.onlineReservation;
 
-public class Ratings {
-	String ratingId;
+import java.util.Date;
+
+public class Rating {
+	String reviewId;
 	String userId;
 	String restaurantId;
+	
 	double rating;
+	Date date;
 }

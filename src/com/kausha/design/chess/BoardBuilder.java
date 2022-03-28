@@ -13,6 +13,7 @@ public class BoardBuilder {
 		return this;
 	}
 	
+	// Player1 has white pieces.
 	public BoardBuilder placePlayer1(){
 		if(!boardInitialized)
 			throw new RuntimeException("Board must be initialized before placing players");
@@ -20,6 +21,7 @@ public class BoardBuilder {
 		return this;
 	}
 	
+	// Player2 has black pieces.
 	public BoardBuilder placePlayer2(){
 		if(!boardInitialized)
 			throw new RuntimeException("Board must be initialized before placing players");

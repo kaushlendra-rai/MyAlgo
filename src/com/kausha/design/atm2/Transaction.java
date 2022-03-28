@@ -6,6 +6,7 @@ public class Transaction {
 	String transactionID;
 	String atmID;
 	Date time;
+	String cardNumber;
 	TransactionType transactionType;
 	TransactionStatus status;
 }

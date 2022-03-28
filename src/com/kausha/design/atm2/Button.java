@@ -20,6 +20,6 @@ public class Button {
 	}
 	
 	public void onClick() {
-		command.execute();
+		command.execute(this);
 	}
 }

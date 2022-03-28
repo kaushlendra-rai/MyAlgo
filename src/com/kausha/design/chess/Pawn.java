@@ -1,23 +1,11 @@
 package com.kausha.design.chess;
 
-public class Pawn implements Piece {
-	Color colour;
-	boolean active;
-	public Pawn(Color colour) {
-		this.colour = colour;
+public class Pawn extends AbstractPiece {
+	public Pawn(Color color) {
+		super(color, PieceType.PAWN);
 		active = true;
 	}
 	
-	@Override
-	public Color getColour() {
-		return colour;
-	}
-
-	@Override
-	public PieceType getPieceType() {
-		return PieceType.PAWN;
-	}
-
 	@Override
 	public boolean isMoveable(ChessBoard board, Block source, Block target) {
 		// Validate that the target block is not outside the ChessBoard
@@ -39,6 +27,7 @@ public class Pawn implements Piece {
 		if(target.occupied && (target.getY(source.piece.getColour())  - source.getY(source.piece.getColour()) ==1) && 
 				((target.getX(source.piece.getColour()) - source.getX(source.piece.getColour()) == -1) ||
 						(target.getX(source.piece.getColour()) - source.getX(source.piece.getColour()) == 1))) {
+			
 			return true;
 		}
 		
@@ -52,17 +41,9 @@ public class Pawn implements Piece {
 		}
 		
 		end.piece = start.piece;
+		end.occupied = true;
+		
 		start.piece = null;
 		start.occupied = false;
-	}
-
-	@Override
-	public boolean isActive() {	
-		return active;
-	}
-
-	@Override
-	public void deactive() {
-		active = false;
 	}
 }

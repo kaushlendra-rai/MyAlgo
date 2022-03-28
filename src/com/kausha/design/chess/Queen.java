@@ -1,21 +1,11 @@
 package com.kausha.design.chess;
 
-public class Queen implements Piece {
-	Color colour;
-	public Queen(Color colour) {
-		this.colour = colour;
+public class Queen extends AbstractPiece {
+	public Queen(Color color) {
+		super(color, PieceType.QUEEN);
+		active = true;
 	}
 	
-	@Override
-	public Color getColour() {
-		return colour;
-	}
-
-	@Override
-	public PieceType getPieceType() {
-		return PieceType.QUEEN;
-	}
-
 	@Override
 	public boolean isMoveable(ChessBoard board, Block start, Block end) {
 		
@@ -24,20 +14,6 @@ public class Queen implements Piece {
 
 	@Override
 	public void move(ChessBoard board, Block start, Block end) {
-		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public boolean isActive() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void deactive() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

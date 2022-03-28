@@ -8,6 +8,7 @@ public class Restaurant {
 	
 	// Filter restaurants to show popular restaurants in teh city of user.
 	String city;
+	int pincode;
 	
 	// To be used to show nearby restaurants in 1 km range of user.
 	double latitude;

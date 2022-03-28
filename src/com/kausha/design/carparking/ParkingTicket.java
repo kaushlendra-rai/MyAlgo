@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ParkingTicket {
 
-	AbstractVehical vehical;
+	AbstractVehicle vehical;
 	ParkingSpot parkingSpot;
 	Customer customer;
 	

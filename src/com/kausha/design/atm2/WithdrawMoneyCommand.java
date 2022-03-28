@@ -2,7 +2,7 @@ package com.kausha.design.atm2;
 
 import com.kausha.design.atm2.Command;
 
-public class WithdrawMoneyCommand implements Command {
+public class WithdrawMoneyCommand implements ATMAction {
 	BankingService bankingService;
 	
 	CardInfo cardInfo;
