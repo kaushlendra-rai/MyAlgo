@@ -8,6 +8,7 @@ public abstract class AbstractPiece implements Piece {
 	public AbstractPiece(Color color, PieceType type) {
 		this.color = color;
 		this.type = type;
+		active = true;
 	}
 	
 	@Override

@@ -14,11 +14,16 @@ public class Game {
 	String gameID;
 	
 	int gridSquareSize;
+	// We maintain the grid to ensure that a block once occupied by a player is not again used for a move.
 	int[][] grid;
-	Board board;
+
 	Player player1;
 	Player player2;
+	
+	// A list of moves can be maintained in case if we intend to help player see their moves in the game at some later point in time.
+	// This would require to be persisted along with gameID.
 	List<Move> moves;
+	
 	Player winner;
 	
 	int[] rowSum;
@@ -41,7 +46,6 @@ public class Game {
 		this.gridSquareSize = gridSquareSize;
 		this.player1 = player1;
 		this.player2 = player2;
-		this.board = new Board(gridSquareSize);
 		this.rowSum = new int[gridSquareSize];
 		this.columnSum = new int[gridSquareSize];
 		this.grid = new int[gridSquareSize][gridSquareSize];
@@ -91,8 +95,8 @@ public class Game {
 		totalMoves++;
 		
 		// Check for Rows and columns for win.
-		if(rowSum[move.getBlock().getY()] == gridSquareSize || columnSum[move.getBlock().getX()] == gridSquareSize ||
-				fwdDiagonalSum == gridSquareSize || revDiagonalSum == gridSquareSize) {
+		if(Math.abs(rowSum[move.getBlock().getY()]) == gridSquareSize || Math.abs(columnSum[move.getBlock().getX()]) == gridSquareSize ||
+				Math.abs(fwdDiagonalSum) == gridSquareSize || Math.abs(revDiagonalSum) == gridSquareSize) {
 			winner = move.player;
 			status = GameStatus.Winner;
 		}

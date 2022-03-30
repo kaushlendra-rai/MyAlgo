@@ -7,7 +7,7 @@ public class Queen extends AbstractPiece {
 	}
 	
 	@Override
-	public boolean isMoveable(ChessBoard board, Block start, Block end) {
+	public boolean isMoveValid(ChessBoard board, Block start, Block end) {
 		
 		return false;
 	}

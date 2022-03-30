@@ -7,7 +7,7 @@ public class Pawn extends AbstractPiece {
 	}
 	
 	@Override
-	public boolean isMoveable(ChessBoard board, Block source, Block target) {
+	public boolean isMoveValid(ChessBoard board, Block source, Block target) {
 		// Validate that the target block is not outside the ChessBoard
 		// TODO some validation on  values for boarder of board.
 		

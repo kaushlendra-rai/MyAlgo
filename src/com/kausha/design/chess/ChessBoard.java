@@ -11,4 +11,9 @@ public class ChessBoard {
 	boolean nextMoveByWhitePiece = true;
 	Player player1;
 	Player player2;
+	
+	public Status move(Player player, Block source, Block target) throws InvalidMoveException{
+		
+		return Status.Running;
+	}
 }

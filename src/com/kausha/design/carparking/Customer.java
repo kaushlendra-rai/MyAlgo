@@ -2,7 +2,8 @@ package com.kausha.design.carparking;
 
 /**
  * Customer details would be useful in case if customer looses the card and comes back to claim the car based only with vehical 'key'.
- * Here, now the customer could be asked to show the ID which was registered at the time of booking parking lot.
+ * Here, now the customer could be asked to show the ID which was registered at the time of booking parking lot. or an OTP is sent
+ * to his/her mobile number which needs to be produced.
  * @author sinkar
  *
  */
