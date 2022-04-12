@@ -1,5 +1,5 @@
 package com.kausha.design.elevator;
 
-public class ClosesFirstStrategy {
+public class ClosestFirstStrategy {
 
 }
