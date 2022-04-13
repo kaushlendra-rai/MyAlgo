@@ -28,15 +28,28 @@ public class ElevatorCar {
 	
 	public void move() {
 		while(!maintenanceHalt) {
+			outer:
 			// check if there are any requests for lift. If yes, only then move, else stay.
 			if(!up.isEmpty() || !down.isEmpty()) {
 				if(direction == Direction.UP && !up.isEmpty()) {
 					int floor = up.pollFirst();
+					for(int i=currentFloor; i<= floor; i++) {
+
+						// BroadCast this value to the Floor Displays that are associated to this ElevatorCar so that 
+						// they could show the floor at which the lift is at this moment.
+						notifyFloorDisplays();
+						
+						//Though this loop helps in displaying the movement of lift across the floors, if there is a new request
+						// just added, I need to add logic to check if there is a new floor just added which is between the current floor and the 
+						// target 'floor' and halt if required.
+						if(up.first() < floor) {
+							// New request found, add the earlier floor back in request and break the loop.
+							up.add(floor);
+							break outer;
+						}
+					}
 					currentFloor = floor;
 					
-					// BroadCast this value to the Floor Displays that are associated to this ElevatorCar so that 
-					// they could show the floor at which the lift is at this moment.
-					notifyFloorDisplays();
 					openElevatorDoors();
 					// If this is the last floor in this direction, we need to switch the direction.
 					if(up.isEmpty()) {
@@ -47,6 +60,10 @@ public class ElevatorCar {
 				if(direction == Direction.DOWN && !down.isEmpty()) {
 					int floor = down.pollLast();
 					currentFloor = floor;
+					
+					// ###########
+					// ############   DO SOMETHING SIMILAR AS "up" FLOW FOR LOOP AND BREAK FOR NEW REQUESTS ADDED.
+					// ###########
 					
 					// BroadCast this value to the Floor Displays that are associated to this ElevatorCar so that 
 					// they could show the floor at which the lift is at this moment.
@@ -65,12 +82,17 @@ public class ElevatorCar {
 	
 	// If more requests come for the current floor while lift is still open, stay open and update the EvevatorCar State appropriately
 	public void openElevatorDoors() {
-		
+		try {
+			System.out.println("Opening the door");
+			Thread.sleep(1000);
+		}catch(InterruptedException e) {
+			System.out.println("Interrupted");
+		}
 		
 	}
 
 	private void notifyFloorDisplays() {
-		
+		System.out.println("Current floor: " + currentFloor);
 	}
 	public void addStop(int floorNum) {
 		// Set the direction of Lift if it was stationary/idle when the request came.
