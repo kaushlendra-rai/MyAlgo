@@ -1,21 +1,18 @@
 package com.kausha.design.elevator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class ElevatorCar {
-	public ElevatorCar() {
-		currentFloor = 0;
-		direction = Direction.UP;
-	}
 	int currentWeight;
 	int maxAllowedWeight;
 	
 	boolean maintenanceHalt;
 	ElevatorState state;
 	
-	CarDisplay display;
+	
 	List<Button> panel;
 	
 	Direction direction;
@@ -23,6 +20,18 @@ public class ElevatorCar {
 	Set<Integer> stops;
 	
 	int currentFloor;
+	List<ChangeListener> display = new ArrayList<>();
+	
+	public ElevatorCar(List<FloorDisplay> floorDisplay) {
+		currentFloor = 0;
+		direction = Direction.UP;
+		
+		CarDisplay carDisplay = new CarDisplay(currentFloor, direction, false);
+		
+		display.add(carDisplay);
+		display.addAll(floorDisplay);
+	}
+	
 	TreeSet<Integer> up = new TreeSet<>();
 	TreeSet<Integer> down = new TreeSet<>();
 	
@@ -35,9 +44,9 @@ public class ElevatorCar {
 					int floor = up.pollFirst();
 					for(int i=currentFloor; i<= floor; i++) {
 
-						// BroadCast this value to the Floor Displays that are associated to this ElevatorCar so that 
+						// BroadCast this value to the Floor Displays that are associated to this ElevatorCar and Floor display so that 
 						// they could show the floor at which the lift is at this moment.
-						notifyFloorDisplays();
+						notifyAllDisplays();
 						
 						//Though this loop helps in displaying the movement of lift across the floors, if there is a new request
 						// just added, I need to add logic to check if there is a new floor just added which is between the current floor and the 
@@ -67,8 +76,7 @@ public class ElevatorCar {
 					
 					// BroadCast this value to the Floor Displays that are associated to this ElevatorCar so that 
 					// they could show the floor at which the lift is at this moment.
-					notifyFloorDisplays();
-					openElevatorDoors();
+					notifyAllDisplays();
 					// If this is the last floor in this direction, we need to switch the direction.
 					if(down.isEmpty()) {
 						direction = Direction.UP;
@@ -91,9 +99,13 @@ public class ElevatorCar {
 		
 	}
 
-	private void notifyFloorDisplays() {
+	// Updates the display of all interested displays on floor change.
+	private void notifyAllDisplays() {
 		System.out.println("Current floor: " + currentFloor);
+		for(ChangeListener change : display)
+			change.onFloorChange(direction, currentFloor);
 	}
+	
 	public void addStop(int floorNum) {
 		// Set the direction of Lift if it was stationary/idle when the request came.
 		if(up.isEmpty() && down.isEmpty()) {
